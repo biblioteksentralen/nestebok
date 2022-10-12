@@ -1,6 +1,5 @@
-import { Box, ChakraProps, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/js-utils";
+import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/js-utils";
 import NextLink from "next/link";
-import { forrigebokPalette } from "../../utils/colors";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "../verk/CoverImage";
 import { AuthorsLine } from "../verk/Metadata";
@@ -49,7 +48,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
                 width="max-content"
                 color="white"
                 borderRadius="md"
-                backgroundColor={forrigebokPalette[500]}
+                backgroundColor={colors.neptun[500]}
                 padding=".2em .75em"
                 fontSize=".7rem"
                 fontWeight={600}

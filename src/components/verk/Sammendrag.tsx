@@ -2,7 +2,7 @@ import { Box, ChakraProps, List } from "@chakra-ui/react";
 import StarProgressBar from "../StarProgressBar";
 import NextLink from "next/link";
 import { WorksResponse } from "../../utils/forrigebokApi";
-import { forrigebokPalette } from "../../utils/colors";
+import { colors } from "@biblioteksentralen/js-utils";
 
 function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][number] } & ChakraProps) {
   const termer = verk.appealTerms.slice(0, 7);
@@ -26,7 +26,7 @@ const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
         width="max-content"
         color="white"
         borderRadius="md"
-        backgroundColor={fremtredende ? forrigebokPalette[700] : forrigebokPalette[500]}
+        backgroundColor={fremtredende ? colors.neptun[700] : colors.neptun[500]}
         padding=".2em .75em"
         fontWeight={600}
         key={props.term?.id}
