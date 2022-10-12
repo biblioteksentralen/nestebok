@@ -1,9 +1,9 @@
 import { Container, Heading, List, ListItem, Stack, Text } from "@biblioteksentralen/js-utils";
 import { GetStaticPaths, GetStaticProps } from "next";
-import StarProgressBar from "../../../components/StarProgressBar";
-import VerkPreview from "../../../components/verk/VerkPreview";
-import { forrigebokPalette } from "../../../utils/colors";
-import { ReadalikesResponse, VocabularyResponse } from "../../../utils/forrigebokApi";
+import StarProgressBar from "../../components/StarProgressBar";
+import VerkPreview from "../../components/verk/VerkPreview";
+import { forrigebokPalette } from "../../utils/colors";
+import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const vocabulary: VocabularyResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/vocabulary`).then((data) =>

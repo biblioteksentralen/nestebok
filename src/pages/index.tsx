@@ -1,7 +1,7 @@
 import { Container, Heading, List, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import VerkPreview from "../../components/verk/VerkPreview";
-import { WorksResponse } from "../../utils/forrigebokApi";
+import VerkPreview from "../components/verk/VerkPreview";
+import { WorksResponse } from "../utils/forrigebokApi";
 
 interface Data {
   aktuelleVerk: WorksResponse["works"];

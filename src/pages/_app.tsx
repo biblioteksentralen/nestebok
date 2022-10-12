@@ -2,10 +2,10 @@ import { BiblioteksentralenProvider, Box, colors, Grid, isDevelopment } from "@b
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React, { useEffect } from "react";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import LekeplassBanner from "../../components/LekeplassBanner";
-import { PlausibleSetup } from "../../components/Plausible";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import LekeplassBanner from "../components/LekeplassBanner";
+import { PlausibleSetup } from "../components/Plausible";
 
 const LogVercelInfo = () => {
   useEffect(() => {

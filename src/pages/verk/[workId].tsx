@@ -1,8 +1,8 @@
 import { Grid } from "@biblioteksentralen/js-utils";
 import { GetStaticPaths, GetStaticProps } from "next";
-import LignendeBøker from "../../../components/lignendeBøker/LignendeBøker";
-import VerkInfo from "../../../components/verk/VerkInfo";
-import { ReadalikesResponse, WorksResponse } from "../../../utils/forrigebokApi";
+import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
+import VerkInfo from "../../components/verk/VerkInfo";
+import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`).then((data) =>
