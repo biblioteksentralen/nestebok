@@ -59,7 +59,7 @@ export const View = ({ term, eksempler, factor }: Props) => {
           width="max-content"
           color="white"
           borderRadius="xl"
-          backgroundColor={colors.neptun[700]}
+          backgroundColor={colors.neptune[700]}
           padding=".3em .5em"
           fontSize={{ base: "1.1rem", sm: "1.4rem", md: "1.8rem", lg: "2.3rem" }}
           fontWeight={600}
@@ -74,7 +74,7 @@ export const View = ({ term, eksempler, factor }: Props) => {
                 fontSize="sm"
                 key={synonym}
                 padding=".1em .5em"
-                backgroundColor={colors.neptun[500]}
+                backgroundColor={colors.neptune[500]}
                 color="white"
                 borderRadius="md"
               >

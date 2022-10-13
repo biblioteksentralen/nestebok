@@ -26,7 +26,7 @@ const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
         width="max-content"
         color="white"
         borderRadius="md"
-        backgroundColor={fremtredende ? colors.neptun[700] : colors.neptun[500]}
+        backgroundColor={fremtredende ? colors.neptune[700] : colors.neptune[500]}
         padding=".2em .75em"
         fontWeight={600}
         key={props.term?.id}

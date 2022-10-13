@@ -48,7 +48,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
                 width="max-content"
                 color="white"
                 borderRadius="md"
-                backgroundColor={colors.neptun[500]}
+                backgroundColor={colors.neptune[500]}
                 padding=".2em .75em"
                 fontSize=".7rem"
                 fontWeight={600}
