@@ -5,9 +5,11 @@ import VerkPreview from "../../components/verk/VerkPreview";
 import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary: VocabularyResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/vocabulary`).then((data) =>
-    data.json()
-  );
+  const vocabulary: VocabularyResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/vocabulary`, {
+    headers: {
+      "X-User-Agent": "Nestebok",
+    },
+  }).then((data) => data.json());
 
   return {
     paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
