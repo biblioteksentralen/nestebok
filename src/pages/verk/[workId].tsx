@@ -5,9 +5,11 @@ import VerkInfo from "../../components/verk/VerkInfo";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`).then((data) =>
-    data.json()
-  );
+  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`, {
+    headers: {
+      "X-User-Agent": "Nestebok",
+    },
+  }).then((data) => data.json());
 
   return {
     paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
@@ -29,7 +31,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     };
 
   const data: WorksResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/works?query=${decodeURIComponent(workId)}`
+    `https://forrigebok.no/api/v2022-10-10/works?query=${decodeURIComponent(workId)}`,
+    {
+      headers: {
+        "X-User-Agent": "Nestebok",
+      },
+    }
   ).then((data) => data.json());
   const verk = data.works[0];
 
@@ -39,7 +46,12 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     };
 
   const readalikesResponse: ReadalikesResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/readalikes?workId=${workId}&limit=9`
+    `https://forrigebok.no/api/v2022-10-10/readalikes?workId=${workId}&limit=9`,
+    {
+      headers: {
+        "X-User-Agent": "Nestebok",
+      },
+    }
   ).then((data) => data.json());
 
   return {
