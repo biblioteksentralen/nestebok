@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
         <LekeplassBanner />
         <Grid templateRows="auto 1fr auto" minHeight="100vh">
           <Header />
-          <Box as="main" padding="15vmin 0 30vmin" backgroundColor={colors.grey60}>
+          <Box as="main" padding="10vmin 0 30vmin" backgroundColor={colors.grey60} color="white">
             <Component {...pageProps} />
           </Box>
           <Footer />

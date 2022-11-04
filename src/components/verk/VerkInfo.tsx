@@ -52,6 +52,7 @@ function VerkInfo({ verk }: Props) {
       display="flex"
       justifyContent="center"
       padding="0"
+      color="gray.900"
     >
       <Container maxW="container.lg" padding={0}>
         <Grid>
