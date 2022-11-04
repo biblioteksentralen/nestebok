@@ -51,7 +51,14 @@ const slideDown = keyframes`
 `;
 
 const Style = (props: ContainerProps) => (
-  <Container animation={`${slideDown} 1s`} maxW="5xl" backgroundColor="gray.100" borderRadius="0.75rem" padding="0">
+  <Container
+    color="gray.900"
+    animation={`${slideDown} 1s`}
+    maxW="5xl"
+    backgroundColor="gray.100"
+    borderRadius="0.75rem"
+    padding="0"
+  >
     <Container
       as="article"
       maxW="container.lg"

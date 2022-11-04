@@ -1,5 +1,6 @@
 import { Container, Heading, List, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
+import SearchInput from "../components/SearchInput";
 import VerkPreview from "../components/verk/VerkPreview";
 import { WorksResponse } from "../utils/forrigebokApi";
 
@@ -22,16 +23,19 @@ export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
 
 function Index(props: Data) {
   return (
-    <Container maxW="container.lg" color="white">
-      <Stack spacing="2rem">
-        <Heading as="h1">Aktuelle bøker</Heading>
-        <List display="grid" gridGap="calc(1rem + 1vmin)" gridTemplateColumns="repeat(auto-fill, minmax(8rem,1fr))">
-          {props.aktuelleVerk.map((verk) => (
-            <VerkPreview verk={verk} key={verk.id} />
-          ))}
-        </List>
-      </Stack>
-    </Container>
+    <>
+      <SearchInput />
+      <Container marginTop="5rem" maxW="container.lg" color="white">
+        <Stack spacing="2rem">
+          <Heading as="h1">Aktuelle bøker</Heading>
+          <List display="grid" gridGap="calc(1rem + 1vmin)" gridTemplateColumns="repeat(auto-fill, minmax(8rem,1fr))">
+            {props.aktuelleVerk.map((verk) => (
+              <VerkPreview verk={verk} key={verk.id} />
+            ))}
+          </List>
+        </Stack>
+      </Container>
+    </>
   );
 }
 

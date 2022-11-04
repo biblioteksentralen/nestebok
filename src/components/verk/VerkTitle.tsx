@@ -10,7 +10,7 @@ type Props = {
 
 export function VerkTitle({ verk, headingProps, hideSubtitle, ...chakraProps }: Props) {
   return (
-    <Stack {...chakraProps} spacing=".1em">
+    <Stack {...chakraProps} spacing="0">
       <Heading fontWeight={700} size="md" as="h3" noOfLines={2} {...headingProps}>
         {verk.simplifiedPresentationMetadata?.title}
       </Heading>
@@ -18,6 +18,7 @@ export function VerkTitle({ verk, headingProps, hideSubtitle, ...chakraProps }: 
         <Text
           noOfLines={1}
           fontWeight={600}
+          fontSize="sm"
           css={css`
             &::first-letter {
               text-transform: capitalize;
