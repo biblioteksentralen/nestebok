@@ -1,6 +1,7 @@
 import { Grid } from "@biblioteksentralen/js-utils";
 import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
+import SEO from "../../components/SEO";
 import VerkInfo from "../../components/verk/VerkInfo";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 
@@ -66,6 +67,10 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 export const View = (props: Props) => {
   return (
     <Grid gridGap="4rem" key={props.verk.id}>
+      <SEO
+        title={props.verk.simplifiedPresentationMetadata.title}
+        description={`Utforsk bøker som ligner på ${props.verk.simplifiedPresentationMetadata.title}`}
+      />
       <VerkInfo verk={props.verk} />
       <LignendeBøker readalikesResponse={props.readalikesResponse} verk={props.verk} />
     </Grid>
