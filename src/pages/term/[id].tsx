@@ -1,5 +1,6 @@
 import { colors, Container, Heading, List, ListItem, Stack, Text } from "@biblioteksentralen/js-utils";
 import { GetStaticPaths, GetStaticProps } from "next";
+import SEO from "../../components/SEO";
 import StarProgressBar from "../../components/StarProgressBar";
 import VerkPreview from "../../components/verk/VerkPreview";
 import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
@@ -53,6 +54,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 export const View = ({ term, eksempler, factor }: Props) => {
   return (
     <Container maxW="container.lg" color="whiteAlpha.800">
+      <SEO title={term.name} description={`Utforsk appelltermen ${term.name}`} />
       <Stack marginLeft="-.3em">
         <Heading
           as="h1"

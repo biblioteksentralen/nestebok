@@ -22,10 +22,15 @@ import Metadata from "../components/verk/Metadata";
 import { VerkTitle } from "../components/verk/VerkTitle";
 import { WorksResponse } from "../utils/forrigebokApi";
 import { css } from "@emotion/react";
+import SEO from "../components/SEO";
 
 function Wrapper() {
+  const { q } = useRouter().query;
+  const query = typeof q === "string" && q.length > 0 ? q : null;
+
   return (
     <>
+      <SEO title={query ? `"${query}"` : undefined} />
       <SearchInput />
       <Container marginTop="4rem" maxW="container.md">
         <Search />
