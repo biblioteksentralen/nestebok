@@ -56,7 +56,7 @@ const Style = (props: ContainerProps) => (
     animation={`${slideDown} 1s`}
     maxW="5xl"
     backgroundColor="gray.100"
-    borderRadius="0.75rem"
+    borderRadius={{ lg: "xl" }}
     padding="0"
   >
     <Container

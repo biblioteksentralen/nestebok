@@ -1,4 +1,4 @@
-import { Container, withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { Container, Text, withErrorBoundary } from "@biblioteksentralen/js-utils";
 import styled from "@emotion/styled";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";
@@ -48,7 +48,7 @@ function VerkInfo({ verk }: Props) {
     <Container
       maxW="5xl"
       background="gray.100"
-      borderRadius="0.75rem"
+      borderRadius={{ lg: "xl" }}
       display="flex"
       justifyContent="center"
       padding="0"
@@ -61,7 +61,9 @@ function VerkInfo({ verk }: Props) {
             <VerkTitle verk={verk} headingProps={{ as: "h1", size: "xl" }} fontSize="1.2rem" fontWeight={600} />
           </header>
           <Metadata verk={verk} gridArea="meta" />
-          <p style={{ gridArea: "description" }}>{verk.simplifiedPresentationMetadata?.description}</p>
+          <Text overflowWrap="anywhere" style={{ gridArea: "description" }}>
+            {verk.simplifiedPresentationMetadata?.description}
+          </Text>
           <Sammendrag gridArea="sammendrag" verk={verk} />
         </Grid>
       </Container>

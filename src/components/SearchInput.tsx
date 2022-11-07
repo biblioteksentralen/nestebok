@@ -1,12 +1,14 @@
 import {
+  Box,
   BoxProps,
   BsSearch,
   Button,
   Container,
-  Heading,
   InputGroup,
   InputLeftElement,
+  Stack,
   usePrevious,
+  useUniqueId,
 } from "@biblioteksentralen/js-utils";
 import { Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
@@ -24,6 +26,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const { push, query, pathname } = useRouter();
+  const inputId = useUniqueId();
 
   useMount(() => {
     const urlQuery = typeof query.q === "string" ? query.q : undefined;
@@ -57,58 +60,59 @@ function SearchInput({ ...chakraProps }: BoxProps) {
     return () => clearTimeout(timeout);
   }, [value, handleSubmit, prevValue]);
 
-  const label = "Søk etter et verk..";
-
   return (
     <Container
       maxW="container.lg"
       as="nav"
       backgroundColor="gray.800"
       color="white"
-      paddingY="4rem"
+      paddingY={{ base: "1rem", md: "4rem" }}
       paddingX="0"
       borderRadius={{ lg: "xl" }}
       {...chakraProps}
     >
       <Container maxW="container.md">
-        <Heading marginBottom=".5rem" fontSize="1.5rem">
-          Søk i samlingen
-        </Heading>
-        <StyledForm role="search" onSubmit={handleSubmit}>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none" color="whiteAlpha.400" aria-hidden>
-              <BsSearch />
-            </InputLeftElement>
-            <Input
-              type="search"
-              placeholder={label}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              ref={inputRef}
-              backgroundColor="whiteAlpha.200"
-              color="whiteAlpha.900"
-              borderRightRadius={0}
-              _hover={{
-                backgroundColor: "whiteAlpha.300",
-              }}
-              _focusVisible={{
-                outline: "outline",
-                boxShadow: "var(--chakra-shadows-outline)",
-                backgroundColor: "whiteAlpha.300",
-              }}
-              minW={{ base: "14rem", sm: "17rem" }}
-            />
-          </InputGroup>
-          <Button
-            type="submit"
-            variant="solid"
-            backgroundColor={"whiteAlpha.300"}
-            borderLeftRadius={0}
-            _hover={{ backgroundColor: "whiteAlpha.400" }}
-          >
-            Søk
-          </Button>
-        </StyledForm>
+        <Stack spacing=".25rem">
+          <Box as="label" htmlFor={inputId} fontWeight="600" fontSize="1.5rem">
+            Søk i samlingen
+          </Box>
+          <StyledForm role="search" onSubmit={handleSubmit}>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none" color="whiteAlpha.400" aria-hidden>
+                <BsSearch />
+              </InputLeftElement>
+              <Input
+                id={inputId}
+                type="search"
+                placeholder="Søk etter et verk.."
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                ref={inputRef}
+                backgroundColor="whiteAlpha.200"
+                color="whiteAlpha.900"
+                borderRightRadius={0}
+                _hover={{
+                  backgroundColor: "whiteAlpha.300",
+                }}
+                _focusVisible={{
+                  outline: "outline",
+                  boxShadow: "var(--chakra-shadows-outline)",
+                  backgroundColor: "whiteAlpha.300",
+                }}
+                minW={{ base: "14rem", sm: "17rem" }}
+              />
+            </InputGroup>
+            <Button
+              type="submit"
+              variant="solid"
+              backgroundColor={"whiteAlpha.300"}
+              borderLeftRadius={0}
+              _hover={{ backgroundColor: "whiteAlpha.400" }}
+            >
+              Søk
+            </Button>
+          </StyledForm>
+        </Stack>
       </Container>
     </Container>
   );

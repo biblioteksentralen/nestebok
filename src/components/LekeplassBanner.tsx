@@ -9,18 +9,17 @@ function LekeplassBanner() {
         backgroundColor={colors.bsRødMedium}
         color="white"
         boxShadow="md"
-        padding=".2em 10em"
+        padding=".2em 5em"
         opacity={0.75}
-        right={{ base: "-9em", sm: "-9em" }}
-        top={{ base: "2em", sm: "4em" }}
+        right={{ base: "-5em", lg: "-4em" }}
+        top={{ base: "1.5em", lg: "2em" }}
         transform="rotate(35deg)"
         textAlign="center"
         display="flex"
-        flexDirection={{ base: "column", sm: "row" }}
-        gap=".25em"
+        flexDirection="column"
       >
-        <span>Lekeplass for</span>
-        <span>formidlingsdata</span>
+        <span>Lekeplass</span>
+        <span>for formidlingsdata</span>
       </Box>
     </Box>
   );
