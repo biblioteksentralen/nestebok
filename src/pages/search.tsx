@@ -3,26 +3,27 @@ import {
   Center,
   colors,
   Container,
-  HStack,
+  Flex,
   keyframes,
   LinkBox,
   LinkOverlay,
   List,
   ListItem,
+  Show,
   Spinner,
   Stack,
   Text,
 } from "@biblioteksentralen/js-utils";
+import { css } from "@emotion/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import SearchInput from "../components/SearchInput";
+import SEO from "../components/SEO";
 import Coverimage from "../components/verk/CoverImage";
 import Metadata from "../components/verk/Metadata";
 import { VerkTitle } from "../components/verk/VerkTitle";
 import { WorksResponse } from "../utils/forrigebokApi";
-import { css } from "@emotion/react";
-import SEO from "../components/SEO";
 
 function Wrapper() {
   const { q } = useRouter().query;
@@ -32,7 +33,7 @@ function Wrapper() {
     <>
       <SEO title={query ? `"${query}"` : undefined} />
       <SearchInput />
-      <Container marginTop="4rem" maxW="container.md">
+      <Container marginTop={{ base: "2rem", md: "4rem" }} maxW="container.md">
         <Search />
       </Container>
     </>
@@ -115,13 +116,20 @@ const TreffListe = (props: { data: WorksResponse }) => (
               </LinkOverlay>
             </NextLink>
             <Metadata verk={verk} />
-            <HStack flexGrow={1} alignItems="flex-end" fontSize="sm" fontWeight="600">
-              {verk.appealTerms.slice(0, 3).map((term) => (
-                <Box backgroundColor={colors.neptune[600]} padding=".25rem .5rem" borderRadius="md" key={term.term.id}>
-                  {term.term.label}
-                </Box>
-              ))}
-            </HStack>
+            <Show above="md">
+              <Flex flexGrow={1} gap=".5rem" alignItems="flex-end" fontSize="sm" fontWeight="600" flexWrap="wrap">
+                {verk.appealTerms.slice(0, 3).map((term) => (
+                  <Box
+                    backgroundColor={colors.neptune[600]}
+                    padding=".25rem .5rem"
+                    borderRadius="md"
+                    key={term.term.id}
+                  >
+                    {term.term.label}
+                  </Box>
+                ))}
+              </Flex>
+            </Show>
           </Stack>
         </LinkBox>
       </ListItem>
