@@ -66,7 +66,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
       as="nav"
       backgroundColor="gray.800"
       color="white"
-      paddingY={{ base: "1rem", md: "4rem" }}
+      paddingY={{ base: "1rem", md: "2rem" }}
       paddingX="0"
       borderRadius={{ lg: "xl" }}
       {...chakraProps}
