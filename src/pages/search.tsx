@@ -33,7 +33,7 @@ function Wrapper() {
     <>
       <SEO title={query ? `"${query}"` : undefined} />
       <SearchInput />
-      <Container marginTop={{ base: "2rem", md: "4rem" }} maxW="container.md">
+      <Container marginTop="2rem" maxW="container.md">
         <Search />
       </Container>
     </>

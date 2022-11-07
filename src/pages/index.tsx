@@ -25,7 +25,7 @@ function Index(props: Data) {
   return (
     <>
       <SearchInput />
-      <Container marginTop={{ base: "2rem", md: "5rem" }} maxW="container.lg" color="white">
+      <Container marginTop="2rem" maxW="container.lg" color="white">
         <Stack spacing="1rem">
           <Heading as="h1">Aktuelle bøker</Heading>
           <List display="grid" gridGap="calc(1rem + 1vmin)" gridTemplateColumns="repeat(auto-fill, minmax(8rem,1fr))">
