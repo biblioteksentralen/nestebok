@@ -5,6 +5,7 @@ import {
   Container,
   Flex,
   keyframes,
+  Link,
   LinkBox,
   LinkOverlay,
   List,
@@ -67,15 +68,19 @@ function Search() {
 }
 
 const IngenTreff = (props: { query: string }) => (
-  <Center>
+  <Stack textAlign="center">
     <Text fontSize="lg" paddingY="1rem">
       Søk på{" "}
       <Box as="span" fontWeight={600}>
         «{props.query}»
       </Box>{" "}
-      ga ingen treff
+      ga ingen treff.
     </Text>
-  </Center>
+    <Text fontSize="sm">
+      Savner du en bok? Be bibliotikaren din om å legge den inn på{" "}
+      <Link href="https://forrigebok.no/">Forrigebok.no</Link>
+    </Text>
+  </Stack>
 );
 
 const slideDown = keyframes`
