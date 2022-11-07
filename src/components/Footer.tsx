@@ -4,7 +4,7 @@ import { Box, Container } from "@chakra-ui/react";
 function Footer() {
   return (
     <Box as="footer" padding="4rem 0" fontSize="xs" backgroundColor="gray.800" color="white">
-      <Container maxW="container.md">
+      <Container maxW="container.lg">
         <Flex alignItems="flex-end" flexWrap="wrap" gap="3rem">
           <Stack>
             <Text>
