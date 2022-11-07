@@ -2,6 +2,7 @@ const csp = {
   "default-src": ["'self'"],
   "script-src": [
     "'self'",
+    "plausible.io",
     ...(process.env.NODE_ENV === "development"
       ? [
           "'unsafe-eval'", // node_modules/@next/react-refresh-utils/runtime.js
@@ -15,6 +16,7 @@ const csp = {
   ],
   "connect-src": [
     "'self'",
+    "plausible.io/api/",
     // For Safari, se https://bugs.webkit.org/show_bug.cgi?id=201591
     ...(process.env.NODE_ENV === "development" ? ["ws://localhost:3000"] : []),
   ],
