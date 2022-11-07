@@ -1,16 +1,30 @@
-import { BiblioteksentralenLogo, Link, Text } from "@biblioteksentralen/js-utils";
-import { Box, Container, HStack } from "@chakra-ui/react";
+import { BiblioteksentralenLogoWithName, Flex, Link, Stack, Text } from "@biblioteksentralen/js-utils";
+import { Box, Container } from "@chakra-ui/react";
 
 function Footer() {
   return (
-    <Box as="footer" role="contentinfo" padding="2rem 1.5rem 1.5rem 1rem" background="gray.800" color="white">
-      <Container maxW="container.xl">
-        <Link href="https://www.bibsent.no/" variant="plain" display="inline-block">
-          <HStack>
-            <BiblioteksentralenLogo fontSize="1.5rem" />
-            <Text fontWeight="600">Biblioteksentralen</Text>
-          </HStack>
-        </Link>
+    <Box as="footer" padding="4rem 0" fontSize="xs" backgroundColor="gray.800" color="white">
+      <Container maxW="container.md">
+        <Flex alignItems="flex-end" flexWrap="wrap" gap="3rem">
+          <Stack>
+            <Text>
+              <b>Nestebok</b> er utviklet av <Link href="https://www.bibsent.no">Biblioteksentralen</Link>
+            </Text>
+            <Text>
+              Savner du en bok? Be bibliotikaren din om å legge den inn på{" "}
+              <Link href="https://forrigebok.no/">Forrigebok.no</Link>
+            </Text>
+          </Stack>
+          <Link
+            href="https://www.bibsent.no"
+            _hover={{ color: "gray.300" }}
+            flex="1"
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <BiblioteksentralenLogoWithName aria-label="Biblioteksentralen" height="3em" />
+          </Link>
+        </Flex>
       </Container>
     </Box>
   );
