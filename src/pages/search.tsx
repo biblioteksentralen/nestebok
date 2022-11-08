@@ -77,7 +77,7 @@ const IngenTreff = (props: { query: string }) => (
       ga ingen treff.
     </Text>
     <Text fontSize="sm">
-      Savner du en bok? Be bibliotikaren din om å legge den inn på{" "}
+      Savner du en bok? Be bibliotekaren din om å legge den inn på{" "}
       <Link href="https://forrigebok.no/">Forrigebok.no</Link>
     </Text>
   </Stack>
