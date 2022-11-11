@@ -4,6 +4,7 @@ import SearchInput from "../components/SearchInput";
 import VerkPreview from "../components/verk/VerkPreview";
 import { forrigebokFetcher } from "../utils/forrigebokFetcher";
 import { WorksResponse } from "../utils/forrigebokApi";
+import SEO from "../components/SEO";
 
 interface Data {
   aktuelleVerk: WorksResponse["works"];
@@ -21,6 +22,10 @@ export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
 function Index(props: Data) {
   return (
     <>
+      <SEO
+        description="Nestebok er Biblioteksentralens åpne lesersørvistjeneste for å utforske readalikes fra forrigebok.no"
+        path="/"
+      />
       <SearchInput />
       <Container marginTop="2rem" maxW="container.lg" color="white">
         <Stack spacing="1rem">

@@ -4,8 +4,8 @@ import React, { useEffect } from "react";
 
 interface Props {
   title?: string;
-  description?: string;
-  path?: string;
+  description: string;
+  path: string;
 }
 
 const domain = "https://nestebok.no";
@@ -17,24 +17,21 @@ function SEO(props: Props) {
     }
   }, [props.path]);
 
-  const canonical = props.path ? `${domain}${props.path}` : null;
+  const canonical = `${domain}${props.path}`;
   const title = props.title ? `${props.title} | Nestebok` : "Nestebok";
-  const description = props.description
-    ? props.description
-    : "Nestebok er Biblioteksentralen sin lekeplass for formidlingsdata fra blant annet forrigebok.no";
+  const description = props.description;
   const imageUrl = `${domain}/logo.png`;
 
   return (
     <Head>
       <title>{title}</title>
-      {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="canonical" href={canonical} />
       <meta name="description" content={description} />
-      <link rel="icon" type="image/png" href="/icon.png" />
       <meta property="image" content={imageUrl} />
 
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
-      {canonical && <meta property="og:url" content={canonical} />}
+      <meta property="og:url" content={canonical} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content="Forrige bok" />
       <meta property="og:image" content={imageUrl} />

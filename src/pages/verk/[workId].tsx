@@ -63,6 +63,7 @@ export const View = (props: Props) => {
       <SEO
         title={props.verk.simplifiedPresentationMetadata.title}
         description={`Utforsk bøker som ligner på ${props.verk.simplifiedPresentationMetadata.title}`}
+        path={getVerkUrl(props.verk)}
       />
       <VerkInfo verk={props.verk} />
       <LignendeBøker readalikesResponse={props.readalikesResponse} verk={props.verk} />

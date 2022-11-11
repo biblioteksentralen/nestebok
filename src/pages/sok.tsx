@@ -33,7 +33,7 @@ function Wrapper() {
 
   return (
     <>
-      <SEO title={query ? `"${query}"` : undefined} />
+      <SEO description="Søk i samlingen til forrigebok.no" title={query ? `"${query}"` : undefined} path="/søk" />
       <SearchInput />
       <Container marginTop="2rem" maxW="container.md">
         <Search />
