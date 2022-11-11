@@ -25,6 +25,7 @@ const csp = {
     "'self'",
     "data:", // next-image
     "media.aja.bs.no",
+    "www.cappelendamm.no/",
     "aja.bs.no",
   ],
 };
