@@ -8,7 +8,7 @@ import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokA
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
+  const data = await forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
@@ -36,17 +36,18 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
-  const verk = data.works[0];
+  const worksPromise = forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
+  const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
+    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+  );
+
+  const [worksResponse, readalikesResponse] = await Promise.all([worksPromise, readalikesPromise]);
+  const verk = worksResponse.works[0];
 
   if (!verk)
     return {
       notFound: true,
     };
-
-  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
-    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
-  );
 
   return {
     props: {

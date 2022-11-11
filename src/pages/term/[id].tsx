@@ -8,7 +8,7 @@ import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokAp
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary: VocabularyResponse = await forrigebokFetcher(`/api/v2022-10-10/vocabulary`);
+  const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/api/v2022-10-10/vocabulary`);
 
   return {
     paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
@@ -32,25 +32,24 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
         ctx.params.id.split(";").at(-1)
       : undefined;
 
-  const vocabulary: VocabularyResponse = await forrigebokFetcher(`/api/v2022-10-10/vocabulary`);
+  if (!id) return { notFound: true };
 
-  const term = vocabulary.terms.find((term) => term.id === id);
-
-  if (!term) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
-    `/api/v2022-10-10/readalikes?terms=${term.id}&limit=10`
+  const vocabularyPromise = forrigebokFetcher<VocabularyResponse>(`/api/v2022-10-10/vocabulary`);
+  const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
+    `/api/v2022-10-10/readalikes?terms=${encodeURIComponent(id)}&limit=10`
   );
+
+  const [vocabularyResponse, readalikesResponse] = await Promise.all([vocabularyPromise, readalikesPromise]);
+
+  const term = vocabularyResponse.terms.find((term) => term.id === id);
+
+  if (!term) return { notFound: true };
 
   return {
     props: {
       term,
       eksempler: readalikesResponse,
-      factor: vocabulary.factors.find((factor) => factor.id === term.factorId),
+      factor: vocabularyResponse.factors.find((factor) => factor.id === term.factorId),
     },
     revalidate: 600,
   };

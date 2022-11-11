@@ -10,7 +10,7 @@ const api: NextApiHandler<WorksResponse | { message: string }> = async (req, res
     return;
   }
 
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(query)}`);
+  const data = await forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?query=${encodeURIComponent(query)}`);
 
   res.status(200).json(data);
 };
