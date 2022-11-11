@@ -36,17 +36,18 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
-  const verk = data.works[0];
+  const worksPromise = forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
+  const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
+    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+  );
+
+  const [worksResponse, readalikesResponse] = await Promise.all([worksPromise, readalikesPromise]);
+  const verk = worksResponse.works[0];
 
   if (!verk)
     return {
       notFound: true,
     };
-
-  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
-    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
-  );
 
   return {
     props: {
