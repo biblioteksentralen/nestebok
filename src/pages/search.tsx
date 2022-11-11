@@ -25,6 +25,7 @@ import Coverimage from "../components/verk/CoverImage";
 import Metadata from "../components/verk/Metadata";
 import { VerkTitle } from "../components/verk/VerkTitle";
 import { WorksResponse } from "../utils/forrigebokApi";
+import { getVerkUrl } from "./verk/[workId]";
 
 function Wrapper() {
   const { q } = useRouter().query;
@@ -109,7 +110,7 @@ const TreffListe = (props: { data: WorksResponse }) => (
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
           <Stack spacing=".25rem" padding="1rem">
-            <NextLink href={`/verk/${encodeURIComponent(verk?.id)}`} passHref>
+            <NextLink href={getVerkUrl(verk)} passHref>
               <LinkOverlay>
                 <VerkTitle
                   verk={verk}

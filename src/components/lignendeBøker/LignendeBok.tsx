@@ -1,5 +1,6 @@
 import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/js-utils";
 import NextLink from "next/link";
+import { getVerkUrl } from "../../pages/verk/[workId]";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "../verk/CoverImage";
 import { AuthorsLine } from "../verk/Metadata";
@@ -59,7 +60,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
             ))}
           </Flex>
           <Box padding=".5rem">
-            <NextLink href={`/verk/${encodeURIComponent(readalike.id)}`} passHref>
+            <NextLink href={getVerkUrl(readalike)} passHref>
               <LinkOverlay>
                 <VerkTitle fontSize="xs" headingProps={{ size: "sm" }} verk={readalike} />
               </LinkOverlay>

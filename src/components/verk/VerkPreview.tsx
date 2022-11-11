@@ -1,5 +1,6 @@
 import { Box, LinkBox, LinkOverlay, withErrorBoundary } from "@biblioteksentralen/js-utils";
 import NextLink from "next/link";
+import { getVerkUrl } from "../../pages/verk/[workId]";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";
 import { AuthorsLine } from "./Metadata";
@@ -20,7 +21,7 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
     >
       <Coverimage verk={verk} boxShadow="md" />
       <Box minH="4.3rem" padding=".15rem">
-        <NextLink href={`/verk/${encodeURIComponent(verk?.id)}`} passHref>
+        <NextLink href={getVerkUrl(verk)} passHref>
           <LinkOverlay>
             <VerkTitle
               verk={verk}

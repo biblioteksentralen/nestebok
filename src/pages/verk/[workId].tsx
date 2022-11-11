@@ -3,7 +3,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
 import VerkInfo from "../../components/verk/VerkInfo";
-import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
+import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokApi";
+import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`, {
@@ -23,8 +24,15 @@ type Props = {
   readalikesResponse: ReadalikesResponse;
 };
 
+export const getVerkUrl = (verk: Work) =>
+  `/verk/${slugifyString(verk.simplifiedPresentationMetadata.title)};${encodeURIComponent(verk?.id)}`;
+
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  const workId = typeof ctx.params?.workId == "string" ? ctx.params.workId : undefined;
+  const workId =
+    typeof ctx.params?.workId == "string"
+      ? // Split på ";" fordi første del av url før ";" kun brukes for human-readable tittel
+        ctx.params.workId.split(";").at(-1)
+      : undefined;
 
   if (!workId)
     return {

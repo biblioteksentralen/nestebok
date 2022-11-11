@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import SearchInput from "../components/SearchInput";
 import VerkPreview from "../components/verk/VerkPreview";
 import { WorksResponse } from "../utils/forrigebokApi";
+import { slugifyString } from "../utils/slugifyString";
 
 interface Data {
   aktuelleVerk: WorksResponse["works"];
