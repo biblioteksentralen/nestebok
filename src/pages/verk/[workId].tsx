@@ -8,7 +8,7 @@ import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokA
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
+  const data = await forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),

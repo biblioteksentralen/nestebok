@@ -11,7 +11,7 @@ interface Data {
 }
 
 export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
-  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
+  const data = await forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     props: { aktuelleVerk: data.works },

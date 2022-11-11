@@ -8,7 +8,7 @@ import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokAp
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary: VocabularyResponse = await forrigebokFetcher(`/api/v2022-10-10/vocabulary`);
+  const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/api/v2022-10-10/vocabulary`);
 
   return {
     paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
