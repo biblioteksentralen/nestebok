@@ -27,8 +27,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test-ci": "npm run typeCheck",
-    "typeCheck": "tsc",
+    "test-ci": "npm run type-check",
+    "type-check": "tsc",
     "lint": "next lint",
     "prepare": "husky install"
   },

@@ -47,7 +47,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
   const handleSubmit = useCallback(
     (e?: React.FormEvent<HTMLFormElement>) => {
       e?.preventDefault();
-      value && push(`/search?q=${value}`);
+      value && push(`/sok?q=${value}`);
     },
     [value, push]
   );

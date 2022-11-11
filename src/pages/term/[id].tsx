@@ -3,14 +3,12 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import SEO from "../../components/SEO";
 import StarProgressBar from "../../components/StarProgressBar";
 import VerkPreview from "../../components/verk/VerkPreview";
+import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
+import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary: VocabularyResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/vocabulary`, {
-    headers: {
-      "X-User-Agent": "Nestebok",
-    },
-  }).then((data) => data.json());
+  const vocabulary: VocabularyResponse = await forrigebokFetcher(`/api/v2022-10-10/vocabulary`);
 
   return {
     paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
@@ -24,11 +22,18 @@ type Props = {
   eksempler: ReadalikesResponse;
 };
 
+export const getTermUrl = (term: Pick<VocabularyResponse["terms"][number], "name" | "id">) =>
+  `/term/${slugifyString(term.name)};${encodeURIComponent(term?.id)}`;
+
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  const id = ctx.params?.id;
-  const vocabulary: VocabularyResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/vocabulary`).then((data) =>
-    data.json()
-  );
+  const id =
+    typeof ctx.params?.id == "string"
+      ? // Split på ";" fordi første del av url før ";" kun brukes for human-readable tittel
+        ctx.params.id.split(";").at(-1)
+      : undefined;
+
+  const vocabulary: VocabularyResponse = await forrigebokFetcher(`/api/v2022-10-10/vocabulary`);
+
   const term = vocabulary.terms.find((term) => term.id === id);
 
   if (!term) {
@@ -37,9 +42,9 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     };
   }
 
-  const readalikesResponse: ReadalikesResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/readalikes?terms=${term.id}&limit=10`
-  ).then((data) => data.json());
+  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
+    `/api/v2022-10-10/readalikes?terms=${term.id}&limit=10`
+  );
 
   return {
     props: {
@@ -54,7 +59,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 export const View = ({ term, eksempler, factor }: Props) => {
   return (
     <Container maxW="container.lg" color="whiteAlpha.800">
-      <SEO title={term.name} description={`Utforsk appelltermen ${term.name}`} />
+      <SEO title={term.name} description={`Utforsk appelltermen ${term.name}`} path={getTermUrl(term)} />
       <Stack marginLeft="-.3em">
         <Heading
           as="h1"

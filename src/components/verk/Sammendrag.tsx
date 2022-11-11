@@ -3,6 +3,7 @@ import StarProgressBar from "../StarProgressBar";
 import NextLink from "next/link";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import { colors } from "@biblioteksentralen/js-utils";
+import { getTermUrl } from "../../pages/term/[id]";
 
 function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][number] } & ChakraProps) {
   const termer = verk.appealTerms.slice(0, 7);
@@ -18,7 +19,7 @@ function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][num
 const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
   const fremtredende = (props.weight ?? 0) > 0.5;
   return (
-    <NextLink href={`/term/${props.term.id}`} passHref>
+    <NextLink href={getTermUrl({ name: props.term.label, id: props.term.id })} passHref>
       <Box
         as="a"
         display="flex"

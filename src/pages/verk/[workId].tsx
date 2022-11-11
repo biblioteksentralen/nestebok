@@ -3,14 +3,12 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
 import VerkInfo from "../../components/verk/VerkInfo";
-import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
+import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
+import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokApi";
+import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`, {
-    headers: {
-      "X-User-Agent": "Nestebok",
-    },
-  }).then((data) => data.json());
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
@@ -23,22 +21,22 @@ type Props = {
   readalikesResponse: ReadalikesResponse;
 };
 
+export const getVerkUrl = (verk: Work) =>
+  `/verk/${slugifyString(verk.simplifiedPresentationMetadata.title)};${encodeURIComponent(verk?.id)}`;
+
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  const workId = typeof ctx.params?.workId == "string" ? ctx.params.workId : undefined;
+  const workId =
+    typeof ctx.params?.workId == "string"
+      ? // Split på ";" fordi første del av url før ";" kun brukes for human-readable tittel
+        ctx.params.workId.split(";").at(-1)
+      : undefined;
 
   if (!workId)
     return {
       notFound: true,
     };
 
-  const data: WorksResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/works?query=${decodeURIComponent(workId)}`,
-    {
-      headers: {
-        "X-User-Agent": "Nestebok",
-      },
-    }
-  ).then((data) => data.json());
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
   const verk = data.works[0];
 
   if (!verk)
@@ -46,14 +44,9 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const readalikesResponse: ReadalikesResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/readalikes?workId=${workId}&limit=9`,
-    {
-      headers: {
-        "X-User-Agent": "Nestebok",
-      },
-    }
-  ).then((data) => data.json());
+  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
+    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+  );
 
   return {
     props: {
@@ -70,6 +63,7 @@ export const View = (props: Props) => {
       <SEO
         title={props.verk.simplifiedPresentationMetadata.title}
         description={`Utforsk bøker som ligner på ${props.verk.simplifiedPresentationMetadata.title}`}
+        path={getVerkUrl(props.verk)}
       />
       <VerkInfo verk={props.verk} />
       <LignendeBøker readalikesResponse={props.readalikesResponse} verk={props.verk} />
