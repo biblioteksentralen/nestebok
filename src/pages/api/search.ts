@@ -1,4 +1,5 @@
 import { NextApiHandler } from "next";
+import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
 const api: NextApiHandler<WorksResponse | { message: string }> = async (req, res) => {
@@ -9,9 +10,7 @@ const api: NextApiHandler<WorksResponse | { message: string }> = async (req, res
     return;
   }
 
-  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?query=${query}`).then(
-    (response) => response.json()
-  );
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(query)}`);
 
   res.status(200).json(data);
 };

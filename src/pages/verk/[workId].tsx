@@ -3,15 +3,12 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
 import VerkInfo from "../../components/verk/VerkInfo";
+import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokApi";
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`, {
-    headers: {
-      "X-User-Agent": "Nestebok",
-    },
-  }).then((data) => data.json());
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
@@ -39,14 +36,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const data: WorksResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/works?query=${decodeURIComponent(workId)}`,
-    {
-      headers: {
-        "X-User-Agent": "Nestebok",
-      },
-    }
-  ).then((data) => data.json());
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
   const verk = data.works[0];
 
   if (!verk)
@@ -54,14 +44,9 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const readalikesResponse: ReadalikesResponse = await fetch(
-    `https://forrigebok.no/api/v2022-10-10/readalikes?workId=${workId}&limit=9`,
-    {
-      headers: {
-        "X-User-Agent": "Nestebok",
-      },
-    }
-  ).then((data) => data.json());
+  const readalikesResponse: ReadalikesResponse = await forrigebokFetcher(
+    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+  );
 
   return {
     props: {

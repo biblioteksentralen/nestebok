@@ -2,19 +2,15 @@ import { Container, Heading, List, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import SearchInput from "../components/SearchInput";
 import VerkPreview from "../components/verk/VerkPreview";
+import { forrigebokFetcher } from "../utils/forrigebokFetcher";
 import { WorksResponse } from "../utils/forrigebokApi";
-import { slugifyString } from "../utils/slugifyString";
 
 interface Data {
   aktuelleVerk: WorksResponse["works"];
 }
 
 export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
-  const data: WorksResponse = await fetch(`https://forrigebok.no/api/v2022-10-10/works?sort=dateUpdated`, {
-    headers: {
-      "X-User-Agent": "Nestebok",
-    },
-  }).then((data) => data.json());
+  const data: WorksResponse = await forrigebokFetcher(`/api/v2022-10-10/works?sort=dateUpdated`);
 
   return {
     props: { aktuelleVerk: data.works },
