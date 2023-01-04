@@ -12,16 +12,30 @@ interface Data {
   aktuelleBarnebøker: WorksResponse["works"];
 }
 
-export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
-  const sisteVoksenbøker = await forrigebokFetcher<WorksResponse>(
+export const fetchAktuelleBøker = async (): Promise<Data> => {
+  const aktuelleVoksenbøkerPromise = forrigebokFetcher<WorksResponse>(
     `/api/v2022-10-10/works?limit=10&sort=dateUpdated&audienceAges=Voksne`
   );
-  const sisteBarnebøker = await forrigebokFetcher<WorksResponse>(
+  const aktuelleBarnebøkerPromise = forrigebokFetcher<WorksResponse>(
     `/api/v2022-10-10/works?limit=10&sort=dateUpdated&audienceAges=0-2 år,3-5 år,6-8 år,9-10 år,11-12 år,Ungdom`
   );
 
+  const [aktuelleVoksenbøker, aktuelleBarnebøker] = await Promise.all([
+    aktuelleVoksenbøkerPromise,
+    aktuelleBarnebøkerPromise,
+  ]);
+
   return {
-    props: { aktuelleBarnebøker: sisteBarnebøker.works, aktuelleVoksenbøker: sisteVoksenbøker.works },
+    aktuelleVoksenbøker: aktuelleVoksenbøker.works,
+    aktuelleBarnebøker: aktuelleBarnebøker.works,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Data> = async (ctx) => {
+  const aktuelleBøker = await fetchAktuelleBøker();
+
+  return {
+    props: aktuelleBøker,
     revalidate: 60,
   };
 };
