@@ -6,12 +6,15 @@ import VerkInfo from "../../components/verk/VerkInfo";
 import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokApi";
 import { slugifyString } from "../../utils/slugifyString";
+import { fetchAktuelleBøker } from "..";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?sort=dateUpdated`);
+  const data = await fetchAktuelleBøker();
+
+  const allWorks = [...data.aktuelleBarnebøker, ...data.aktuelleVoksenbøker];
 
   return {
-    paths: data.works.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
+    paths: allWorks.map((work) => ({ params: { workId: encodeURIComponent(work.id) } })),
     fallback: "blocking",
   };
 };
