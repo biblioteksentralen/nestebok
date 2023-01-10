@@ -25,6 +25,7 @@ import Coverimage from "../components/verk/CoverImage";
 import Metadata from "../components/verk/Metadata";
 import { VerkTitle } from "../components/verk/VerkTitle";
 import { WorksResponse } from "../utils/forrigebokApi";
+import { forrigebokFetcher } from "../utils/forrigebokFetcher";
 import { getVerkUrl } from "./verk/[workId]";
 
 function Wrapper() {
@@ -45,9 +46,7 @@ function Wrapper() {
 function Search() {
   const { q } = useRouter().query;
   const query = typeof q === "string" && q.length > 0 ? q : null;
-  const results = useSWR<WorksResponse>(query, (query) =>
-    fetch(`/api/search?q=${q}`).then((response) => response.json())
-  );
+  const results = useSWR<WorksResponse>(`/works?query=${query}`, forrigebokFetcher);
 
   if (!query) return null;
 

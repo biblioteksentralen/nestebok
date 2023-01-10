@@ -17,6 +17,7 @@ const csp = {
   "connect-src": [
     "'self'",
     "plausible.io/api/",
+    "https://forrigebok.no/",
     // For Safari, se https://bugs.webkit.org/show_bug.cgi?id=201591
     ...(process.env.NODE_ENV === "development" ? ["ws://localhost:3000"] : []),
   ],

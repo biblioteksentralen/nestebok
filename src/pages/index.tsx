@@ -14,10 +14,10 @@ interface Data {
 
 export const fetchAktuelleBøker = async (): Promise<Data> => {
   const aktuelleVoksenbøkerPromise = forrigebokFetcher<WorksResponse>(
-    `/api/v2022-10-10/works?limit=10&sort=dateUpdated&audienceAges=Voksne`
+    `/works?limit=10&sort=dateUpdated&audienceAges=Voksne`
   );
   const aktuelleBarnebøkerPromise = forrigebokFetcher<WorksResponse>(
-    `/api/v2022-10-10/works?limit=10&sort=dateUpdated&audienceAges=0-2 år,3-5 år,6-8 år,9-10 år,11-12 år,Ungdom`
+    `/works?limit=10&sort=dateUpdated&audienceAges=0-2 år,3-5 år,6-8 år,9-10 år,11-12 år,Ungdom`
   );
 
   const [aktuelleVoksenbøker, aktuelleBarnebøker] = await Promise.all([
