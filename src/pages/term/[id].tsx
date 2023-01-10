@@ -8,7 +8,7 @@ import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokAp
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/api/v2022-10-10/vocabulary`);
+  const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/vocabulary`);
 
   return {
     paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
@@ -34,9 +34,9 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
   if (!id) return { notFound: true };
 
-  const vocabularyPromise = forrigebokFetcher<VocabularyResponse>(`/api/v2022-10-10/vocabulary`);
+  const vocabularyPromise = forrigebokFetcher<VocabularyResponse>(`/vocabulary`);
   const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
-    `/api/v2022-10-10/readalikes?terms=${encodeURIComponent(id)}&limit=10`
+    `/readalikes?terms=${encodeURIComponent(id)}&limit=10`
   );
 
   const [vocabularyResponse, readalikesResponse] = await Promise.all([vocabularyPromise, readalikesPromise]);

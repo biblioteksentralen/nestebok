@@ -39,9 +39,9 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const worksPromise = forrigebokFetcher<WorksResponse>(`/api/v2022-10-10/works?query=${encodeURIComponent(workId)}`);
+  const worksPromise = forrigebokFetcher<WorksResponse>(`/works?query=${encodeURIComponent(workId)}`);
   const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
-    `/api/v2022-10-10/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+    `/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
   );
 
   const [worksResponse, readalikesResponse] = await Promise.all([worksPromise, readalikesPromise]);
