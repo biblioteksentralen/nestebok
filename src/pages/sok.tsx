@@ -109,17 +109,15 @@ const TreffListe = (props: { data: WorksResponse }) => (
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
           <Stack spacing=".25rem" padding="1rem">
-            <NextLink href={getVerkUrl(verk)} passHref>
-              <LinkOverlay>
-                <VerkTitle
-                  verk={verk}
-                  headingProps={{
-                    as: "h3",
-                    size: "md",
-                  }}
-                />
-              </LinkOverlay>
-            </NextLink>
+            <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
+              <VerkTitle
+                verk={verk}
+                headingProps={{
+                  as: "h3",
+                  size: "md",
+                }}
+              />
+            </LinkOverlay>
             <Metadata verk={verk} />
             <Show above="md">
               <Flex flexGrow={1} gap=".5rem" alignItems="flex-end" fontSize="sm" fontWeight="600" flexWrap="wrap">

@@ -21,20 +21,18 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
     >
       <Coverimage verk={verk} boxShadow="md" />
       <Box minH="4.3rem" padding=".15rem">
-        <NextLink href={getVerkUrl(verk)} passHref>
-          <LinkOverlay>
-            <VerkTitle
-              verk={verk}
-              hideSubtitle
-              headingProps={{
-                fontSize: "md",
-                padding: "0.25rem 0",
-                as: "h3",
-                size: "md",
-              }}
-            />
-          </LinkOverlay>
-        </NextLink>
+        <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
+          <VerkTitle
+            verk={verk}
+            hideSubtitle
+            headingProps={{
+              fontSize: "md",
+              padding: "0.25rem 0",
+              as: "h3",
+              size: "md",
+            }}
+          />
+        </LinkOverlay>
         <AuthorsLine hideYearPublished marginTop="-.1rem" fontSize="sm" verk={verk} />
       </Box>
     </LinkBox>
