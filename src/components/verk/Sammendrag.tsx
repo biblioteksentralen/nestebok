@@ -17,7 +17,7 @@ function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][num
 }
 
 const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
-  const fremtredende = (props.weight ?? 0) > 0.5;
+  const fremtredende = (props.averageWeight ?? 0) > 0.5;
   return (
     <Box
       as={NextLink}

@@ -25,7 +25,7 @@ export interface Work {
   }[];
   numberOfRegistrations: number;
   appealTerms: {
-    weight: number;
+    averageWeight: number;
     term: {
       id: string;
       label: string;

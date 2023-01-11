@@ -16,7 +16,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
     ?.map((verkTerm) => {
       const readalikeTermMatch = readalike.appealTerms?.find((term) => term.term?.id === verkTerm.term?.id);
       return {
-        score: (readalikeTermMatch?.weight ?? 0) * (verkTerm.weight ?? 0),
+        score: (readalikeTermMatch?.averageWeight ?? 0) * (verkTerm.averageWeight ?? 0),
         term: verkTerm.term,
       };
     })
