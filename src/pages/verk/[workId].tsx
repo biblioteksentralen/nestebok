@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const worksPromise = forrigebokFetcher<WorksResponse>(`/works?query=${encodeURIComponent(workId)}`);
+  const worksPromise = forrigebokFetcher<WorksResponse>(`/works?workId=${encodeURIComponent(workId)}`);
   const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
     `/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
   );
