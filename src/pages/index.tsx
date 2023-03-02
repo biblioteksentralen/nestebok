@@ -71,7 +71,7 @@ const AktuelleBøker = (props: { aktuelleVerk: WorksResponse["works"]; label: st
       <List
         display="grid"
         gridGap="1rem"
-        gridTemplateColumns="repeat(auto-fill, minmax(8rem,1fr))"
+        gridTemplateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(3, 1fr)", md: "repeat(5, 1fr)" }}
         aria-labelledby={id}
       >
         {props.aktuelleVerk.map((verk) => (
