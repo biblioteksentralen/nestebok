@@ -1,4 +1,4 @@
-import { useUniqueId, VisuallyHidden } from "@biblioteksentralen/js-utils";
+import { VisuallyHidden } from "@biblioteksentralen/js-utils";
 import { Container, Heading, List, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import SearchInput from "../components/SearchInput";
@@ -6,6 +6,7 @@ import SEO from "../components/SEO";
 import VerkPreview from "../components/verk/VerkPreview";
 import { WorksResponse } from "../utils/forrigebokApi";
 import { forrigebokFetcher } from "../utils/forrigebokFetcher";
+import { useId } from "react";
 
 interface Data {
   aktuelleVoksenbøker: WorksResponse["works"];
@@ -62,7 +63,7 @@ function Index(props: Data) {
 }
 
 const AktuelleBøker = (props: { aktuelleVerk: WorksResponse["works"]; label: string }) => {
-  const id = useUniqueId();
+  const id = useId();
   return (
     <Stack spacing="1rem">
       <Heading as="h2" id={id}>

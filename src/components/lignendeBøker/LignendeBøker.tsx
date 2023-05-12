@@ -1,10 +1,11 @@
-import { Container, ContainerProps, Heading, List, useUniqueId, withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@biblioteksentralen/js-utils";
 import { css, keyframes } from "@emotion/react";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";
+import { useId } from "react";
 
 function LignendeBøker(props: { readalikesResponse: ReadalikesResponse; verk: WorksResponse["works"][number] }) {
-  const headerId = useUniqueId();
+  const headerId = useId();
 
   return (
     <Style aria-labelledby={headerId}>
