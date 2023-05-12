@@ -64,4 +64,5 @@ export interface VocabularyResponse {
 
 export type ReadalikesResponse = {
   readalikes: Work[];
+  work?: Work;
 };

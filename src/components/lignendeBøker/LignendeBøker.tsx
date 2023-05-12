@@ -1,11 +1,13 @@
 import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@biblioteksentralen/js-utils";
 import { css, keyframes } from "@emotion/react";
-import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
+import { Work } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";
 import { useId } from "react";
 
-function LignendeBøker(props: { readalikesResponse: ReadalikesResponse; verk: WorksResponse["works"][number] }) {
+function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
   const headerId = useId();
+
+  const { readalikes, work } = props;
 
   return (
     <Style aria-labelledby={headerId}>
@@ -21,11 +23,11 @@ function LignendeBøker(props: { readalikesResponse: ReadalikesResponse; verk: W
         gap="1rem"
         alignItems="end"
       >
-        {props.readalikesResponse.readalikes.map((readalike, i) => (
+        {readalikes.map((readalike, i) => (
           <Lignendebok
             key={i}
             readalike={readalike}
-            verk={props.verk}
+            verk={work}
             maxW="20rem"
             css={css`
               animation: ${popIn} 0.2s backwards ${i * 0.1 + 0.5}s;
