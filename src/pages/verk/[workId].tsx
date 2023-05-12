@@ -4,7 +4,7 @@ import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
 import VerkInfo from "../../components/verk/VerkInfo";
 import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
-import { ReadalikesResponse, Work, WorksResponse } from "../../utils/forrigebokApi";
+import { ReadalikesResponse, Work } from "../../utils/forrigebokApi";
 import { slugifyString } from "../../utils/slugifyString";
 import { fetchAktuelleBøker } from "..";
 
@@ -20,7 +20,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 type Props = {
-  verk: WorksResponse["works"][number];
   readalikesResponse: ReadalikesResponse;
 };
 
@@ -39,22 +38,17 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       notFound: true,
     };
 
-  const worksPromise = forrigebokFetcher<WorksResponse>(`/works?workId=${encodeURIComponent(workId)}`);
-  const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
+  const readalikesResponse = await forrigebokFetcher<ReadalikesResponse>(
     `/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
   );
 
-  const [worksResponse, readalikesResponse] = await Promise.all([worksPromise, readalikesPromise]);
-  const verk = worksResponse.works[0];
-
-  if (!verk)
+  if (!readalikesResponse.work)
     return {
       notFound: true,
     };
 
   return {
     props: {
-      verk,
       readalikesResponse,
     },
     revalidate: 120,
@@ -62,15 +56,19 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 };
 
 export const View = (props: Props) => {
+  const { readalikes, work } = props.readalikesResponse;
+
+  if (!work) throw new Error("Mangler verk");
+
   return (
-    <Grid gridGap="4rem" key={props.verk.id}>
+    <Grid gridGap="4rem" key={work.id}>
       <SEO
-        title={props.verk.simplifiedPresentationMetadata.title}
-        description={`Utforsk bøker som ligner på ${props.verk.simplifiedPresentationMetadata.title}`}
-        path={getVerkUrl(props.verk)}
+        title={work.simplifiedPresentationMetadata.title}
+        description={`Utforsk bøker som ligner på ${work.simplifiedPresentationMetadata.title}`}
+        path={getVerkUrl(work)}
       />
-      <VerkInfo verk={props.verk} />
-      <LignendeBøker readalikesResponse={props.readalikesResponse} verk={props.verk} />
+      <VerkInfo verk={work} />
+      <LignendeBøker readalikes={readalikes} work={work} />
     </Grid>
   );
 };
