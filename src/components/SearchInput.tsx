@@ -8,12 +8,11 @@ import {
   InputLeftElement,
   Stack,
   usePrevious,
-  useUniqueId,
 } from "@biblioteksentralen/js-utils";
 import { Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/dist/client/router";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useMount } from "../utils/useMount";
 
 const StyledForm = styled.form`
@@ -26,7 +25,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState("");
   const { push, query, pathname } = useRouter();
-  const inputId = useUniqueId();
+  const inputId = useId();
 
   useMount(() => {
     const urlQuery = typeof query.q === "string" ? query.q : undefined;

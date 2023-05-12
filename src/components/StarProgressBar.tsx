@@ -1,4 +1,3 @@
-import { useUniqueId } from "@biblioteksentralen/js-utils";
 import * as React from "react";
 import styled from "@emotion/styled";
 
@@ -14,7 +13,7 @@ const Rect = styled.rect`
 `;
 
 function StarProgressBar(props: Props) {
-  const maskId = useUniqueId();
+  const maskId = React.useId();
   return (
     <svg width="1em" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <mask id={maskId}>
