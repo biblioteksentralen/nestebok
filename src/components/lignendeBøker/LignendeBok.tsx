@@ -1,4 +1,4 @@
-import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/js-utils";
+import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";

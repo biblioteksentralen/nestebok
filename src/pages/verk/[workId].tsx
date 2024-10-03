@@ -1,4 +1,4 @@
-import { Grid } from "@biblioteksentralen/js-utils";
+import { Grid } from "@biblioteksentralen/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
