@@ -1,4 +1,4 @@
-import { Container, Text, withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { Container, Text, withErrorBoundary } from "@biblioteksentralen/react";
 import styled from "@emotion/styled";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";

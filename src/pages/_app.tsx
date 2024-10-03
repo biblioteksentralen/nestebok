@@ -1,10 +1,11 @@
-import { BiblioteksentralenProvider, Box, colors, Grid, isDevelopment } from "@biblioteksentralen/js-utils";
+import { BiblioteksentralenProvider, Box, colors, Grid } from "@biblioteksentralen/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { PlausibleSetup } from "../components/Plausible";
+import { isDevelopment } from "@biblioteksentralen/utils";
 
 const LogVercelInfo = () => {
   useEffect(() => {

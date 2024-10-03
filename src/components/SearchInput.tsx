@@ -1,19 +1,19 @@
 import {
   Box,
   BoxProps,
-  BsSearch,
   Button,
   Container,
   InputGroup,
   InputLeftElement,
   Stack,
   usePrevious,
-} from "@biblioteksentralen/js-utils";
+} from "@biblioteksentralen/react";
 import { Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/dist/client/router";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { useMount } from "../utils/useMount";
+import { Search } from "react-feather";
 
 const StyledForm = styled.form`
   display: flex;
@@ -77,8 +77,8 @@ function SearchInput({ ...chakraProps }: BoxProps) {
           </Box>
           <StyledForm role="search" onSubmit={handleSubmit}>
             <InputGroup>
-              <InputLeftElement pointerEvents="none" color="whiteAlpha.400" aria-hidden>
-                <BsSearch />
+              <InputLeftElement pointerEvents="none" color="whiteAlpha.500" aria-hidden>
+                <Search size="1em" />
               </InputLeftElement>
               <Input
                 id={inputId}

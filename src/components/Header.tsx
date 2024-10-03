@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Link } from "@biblioteksentralen/js-utils";
+import { Box, Container, Flex, Link } from "@biblioteksentralen/react";
 import { css } from "@emotion/react";
 import NextLink from "next/link";
 

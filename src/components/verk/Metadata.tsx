@@ -1,4 +1,4 @@
-import { ChakraProps, Flex, FlexProps, Link, Stack } from "@biblioteksentralen/js-utils";
+import { ChakraProps, Flex, FlexProps, Link, Stack } from "@biblioteksentralen/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { WorksResponse } from "../../utils/forrigebokApi";

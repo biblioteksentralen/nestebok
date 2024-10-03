@@ -1,4 +1,5 @@
-import { BookIcon, colors, seededRandom } from "@biblioteksentralen/js-utils";
+import { BookIcon } from "@biblioteksentralen/icons";
+import { colors, seededRandom } from "@biblioteksentralen/utils";
 import { Box, ChakraProps, Image, Skeleton } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
@@ -30,7 +31,7 @@ function Coverimage({ verk, ...chakraProps }: Props) {
         width="100%"
         {...chakraProps}
       >
-        <BookIcon aria-hidden />
+        <BookIcon fontSize="1em" aria-hidden />
       </Box>
     );
   }

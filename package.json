@@ -5,9 +5,12 @@
   "version": "1.0.0",
   "author": "Biblioteksentralen",
   "dependencies": {
-    "@biblioteksentralen/js-utils": "^1.7.0",
+    "@biblioteksentralen/icons": "^2.0.1",
+    "@biblioteksentralen/react": "^2.0.0",
+    "@biblioteksentralen/utils": "^2.0.0",
     "next": "^13.4.2",
     "react": "^18.2.0",
+    "react-feather": "^2.0.10",
     "react-dom": "^18.2.0",
     "swr": "^2.1.5"
   },

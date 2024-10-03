@@ -1,4 +1,4 @@
-import { VisuallyHidden } from "@biblioteksentralen/js-utils";
+import { VisuallyHidden } from "@biblioteksentralen/react";
 import { Container, Heading, List, Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import SearchInput from "../components/SearchInput";

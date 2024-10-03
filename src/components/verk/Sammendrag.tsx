@@ -2,7 +2,7 @@ import { Box, ChakraProps, List } from "@chakra-ui/react";
 import StarProgressBar from "../StarProgressBar";
 import NextLink from "next/link";
 import { WorksResponse } from "../../utils/forrigebokApi";
-import { colors } from "@biblioteksentralen/js-utils";
+import { colors } from "@biblioteksentralen/react";
 import { getTermUrl } from "../../pages/term/[id]";
 
 function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][number] } & ChakraProps) {

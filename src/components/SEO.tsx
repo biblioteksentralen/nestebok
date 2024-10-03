@@ -1,4 +1,4 @@
-import { withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { withErrorBoundary } from "@biblioteksentralen/react";
 import Head from "next/head";
 import React, { useEffect } from "react";
 

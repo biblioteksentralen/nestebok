@@ -1,4 +1,4 @@
-import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@biblioteksentralen/react";
 import { css, keyframes } from "@emotion/react";
 import { Work } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";

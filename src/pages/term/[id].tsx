@@ -1,10 +1,10 @@
-import { colors, Container, Heading, List, ListItem, Stack, Text } from "@biblioteksentralen/js-utils";
+import { colors, Container, Heading, List, ListItem, Stack, Text } from "@biblioteksentralen/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import SEO from "../../components/SEO";
 import StarProgressBar from "../../components/StarProgressBar";
 import VerkPreview from "../../components/verk/VerkPreview";
-import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
+import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { slugifyString } from "../../utils/slugifyString";
 
 export const getStaticPaths: GetStaticPaths = async () => {

@@ -1,4 +1,4 @@
-import { Box, LinkBox, LinkOverlay, withErrorBoundary } from "@biblioteksentralen/js-utils";
+import { Box, LinkBox, LinkOverlay, withErrorBoundary } from "@biblioteksentralen/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
 import { WorksResponse } from "../../utils/forrigebokApi";

@@ -4,7 +4,6 @@ import {
   colors,
   Container,
   Flex,
-  keyframes,
   Link,
   LinkBox,
   LinkOverlay,
@@ -14,8 +13,8 @@ import {
   Spinner,
   Stack,
   Text,
-} from "@biblioteksentralen/js-utils";
-import { css } from "@emotion/react";
+} from "@biblioteksentralen/react";
+import { css, keyframes } from "@emotion/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -84,10 +83,10 @@ const IngenTreff = (props: { query: string }) => (
 );
 
 const slideDown = keyframes`
-from {
-    opacity: 0;
-    transform: translateY(-1rem) scale(0.95);
-}
+  from {
+      opacity: 0;
+      transform: translateY(-1rem) scale(0.95);
+  }
 `;
 
 const TreffListe = (props: { data: WorksResponse }) => (
