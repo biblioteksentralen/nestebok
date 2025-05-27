@@ -9,7 +9,7 @@ function Footer() {
         <Flex alignItems="flex-end" flexWrap="wrap" gap="3rem">
           <Stack>
             <Text>
-              <b>Nestebok</b> er utviklet av <Link href="https://www.bibsent.no">Biblioteksentralen</Link>
+              <b>Nestebok</b> er utviklet av <Link href="https://www.bibliotekenes.no">Biblioteksentralen</Link>
             </Text>
             <Text>
               Savner du en bok? Be bibliotekaren din om å legge den inn på{" "}
@@ -17,7 +17,7 @@ function Footer() {
             </Text>
           </Stack>
           <Link
-            href="https://www.bibsent.no"
+            href="https://www.bibliotekenes.no"
             _hover={{ color: "gray.300" }}
             flex="1"
             display="flex"
