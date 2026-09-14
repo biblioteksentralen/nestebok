@@ -21,7 +21,7 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
       _hover={{ transform: "scale(1.02)", transition: ".2s" }}
     >
       <Coverimage verk={verk} boxShadow="md" />
-      <Box minH="4.3rem" padding=".15rem">
+      <Box minH="6rem" padding=".15rem">
         <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
           <VerkTitle
             verk={verk}

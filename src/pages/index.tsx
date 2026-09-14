@@ -76,7 +76,7 @@ const AktuelleBøker = (props: { aktuelleVerk: WorksResponse["works"]; label: st
         aria-labelledby={id}
       >
         {props.aktuelleVerk.map((verk) => (
-          <List.Item key={verk.id}>
+          <List.Item key={verk.id} asChild>
             <VerkPreview verk={verk} />
           </List.Item>
         ))}
