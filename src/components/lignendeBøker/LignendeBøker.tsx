@@ -16,6 +16,7 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
         </Heading>
       </div>
       <List.Root
+        listStyleType="none"
         display="grid"
         justifyItems="center"
         gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"

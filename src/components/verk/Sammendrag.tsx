@@ -8,7 +8,14 @@ import StarProgressBar from "../StarProgressBar";
 function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][number] } & ListRootProps) {
   const termer = verk.appealTerms.slice(0, 7);
   return (
-    <List.Root display="flex" gap=".5em" flexWrap="wrap" alignContent="flex-start" {...chakraProps}>
+    <List.Root
+      listStyleType="none"
+      display="flex"
+      gap=".5em"
+      flexWrap="wrap"
+      alignContent="flex-start"
+      {...chakraProps}
+    >
       {termer.map((term) => (
         <Term key={term.term.id} {...term} />
       ))}

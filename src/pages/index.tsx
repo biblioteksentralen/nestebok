@@ -65,10 +65,11 @@ const AktuelleBøker = (props: { aktuelleVerk: WorksResponse["works"]; label: st
   const id = useId();
   return (
     <Stack gap="1rem">
-      <Heading as="h2" id={id}>
+      <Heading as="h2" fontSize="2rem" id={id}>
         {props.label}
       </Heading>
       <List.Root
+        listStyleType="none"
         display="grid"
         gridGap="1rem"
         gridTemplateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(3, 1fr)", md: "repeat(5, 1fr)" }}

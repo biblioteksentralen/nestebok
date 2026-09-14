@@ -77,7 +77,14 @@ export const View = ({ term, eksempler, factor }: Props) => {
           <span>{term.name}</span>
         </Heading>
         {term.synonyms && (
-          <List.Root gap=".4rem" display="flex" flexWrap="wrap" alignItems="flex-start" alignContent="flex-end">
+          <List.Root
+            listStyleType="none"
+            gap=".4rem"
+            display="flex"
+            flexWrap="wrap"
+            alignItems="flex-start"
+            alignContent="flex-end"
+          >
             {term.synonyms.map((synonym) => (
               <List.Item
                 fontSize="sm"
@@ -98,6 +105,7 @@ export const View = ({ term, eksempler, factor }: Props) => {
         {term.definition}
       </Text>
       <List.Root
+        listStyleType="none"
         marginTop="4rem"
         display="grid"
         alignItems="end"

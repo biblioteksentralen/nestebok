@@ -68,7 +68,7 @@ const IngenTreff = (props: { query: string }) => (
 );
 
 const TreffListe = (props: { data: WorksResponse }) => (
-  <List.Root gap="1rem">
+  <List.Root gap="1rem" listStyleType="none">
     {props.data?.works.map((verk, i) => (
       <List.Item
         key={verk.id}

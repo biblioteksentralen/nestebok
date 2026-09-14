@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, Container, Input, InputGroup, Stack, usePrevious } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Container, Icon, Input, InputGroup, Stack, usePrevious } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Search } from "react-feather";
@@ -62,9 +62,9 @@ function SearchInput({ ...chakraProps }: BoxProps) {
             <form onSubmit={handleSubmit}>
               <InputGroup
                 startElement={
-                  <Box asChild pointerEvents="none" color="whiteAlpha.500" aria-hidden>
-                    <Search size="1em" />
-                  </Box>
+                  <Icon asChild pointerEvents="none" color="whiteAlpha.500" aria-hidden>
+                    <Search size="1.2em" />
+                  </Icon>
                 }
               >
                 <Input
@@ -76,6 +76,9 @@ function SearchInput({ ...chakraProps }: BoxProps) {
                   ref={inputRef}
                   backgroundColor="whiteAlpha.200"
                   color="whiteAlpha.900"
+                  _placeholder={{
+                    color: "whiteAlpha.500",
+                  }}
                   borderRightRadius={0}
                   _hover={{
                     backgroundColor: "whiteAlpha.300",
