@@ -1,43 +1,9 @@
-import { Container, Text } from "@chakra-ui/react";
-import styled from "@emotion/styled";
+import { Container, Grid, Text } from "@chakra-ui/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";
 import Metadata from "./Metadata";
 import Sammendrag from "./Sammendrag";
 import { VerkTitle } from "./VerkTitle";
-
-const Grid = styled.div`
-  padding: 2.5rem 1rem;
-  min-height: 10rem;
-  display: grid;
-  justify-items: start;
-  grid-gap: 1.5rem 3rem;
-  grid-template-columns: minmax(8rem, 30%) 1fr;
-  grid-template-rows: auto auto 1fr;
-  grid-template-areas:
-    "img title"
-    "img meta"
-    "img sammendrag"
-    "img description";
-  @media (max-width: 700px) {
-    grid-gap: 2rem;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "img title"
-      "img meta"
-      "sammendrag sammendrag"
-      "description description";
-  }
-  @media (max-width: 500px) {
-    grid-template-columns: 7rem 1fr;
-    grid-gap: 1rem 1.5rem;
-    grid-template-areas:
-      "title title"
-      "img meta"
-      "sammendrag sammendrag"
-      "description description";
-  }
-`;
 
 interface Props {
   verk: WorksResponse["works"][number];
@@ -55,7 +21,34 @@ function VerkInfo({ verk }: Props) {
       color="gray.900"
     >
       <Container maxW="container.lg" padding={0}>
-        <Grid>
+        <Grid
+          padding="2.5rem 1rem"
+          minH="10rem"
+          justifyItems="start"
+          gap={{ base: "1rem 1.5rem", sm: "2rem", md: "1.5rem 3rem" }}
+          gridTemplateColumns={{ base: "7rem 1fr", sm: "minmax(8rem, 30%) 1fr" }}
+          gridTemplateRows={{ base: "auto 1fr", md: "auto auto 1fr" }}
+          gridTemplateAreas={{
+            base: `
+              "title title"
+              "img meta"
+              "sammendrag sammendrag"
+              "description description"
+            `,
+            sm: `
+              "img title"
+              "img meta"
+              "sammendrag sammendrag"
+              "description description"
+            `,
+            md: `
+              "img title"
+              "img meta"
+              "img sammendrag"
+              "img description"
+            `,
+          }}
+        >
           <Coverimage gridArea="img" verk={verk} boxShadow="md" />
           <header style={{ gridArea: "title" }}>
             <VerkTitle verk={verk} headingProps={{ as: "h1", size: "xl" }} fontSize="1.2rem" fontWeight={600} />
