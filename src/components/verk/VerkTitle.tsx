@@ -10,7 +10,7 @@ type Props = {
 export function VerkTitle({ verk, headingProps, hideSubtitle, ...chakraProps }: Props) {
   return (
     <Stack {...chakraProps} gap="0">
-      <Heading fontWeight={700} size="md" as="h3" lineClamp={2} {...headingProps}>
+      <Heading fontWeight={700} size="xl" as="h3" lineClamp={2} {...headingProps}>
         {verk.simplifiedPresentationMetadata?.title}
       </Heading>
       {!hideSubtitle && verk.simplifiedPresentationMetadata?.subtitle && (

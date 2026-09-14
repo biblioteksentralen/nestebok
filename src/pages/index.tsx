@@ -65,7 +65,7 @@ const AktuelleBøker = (props: { aktuelleVerk: WorksResponse["works"]; label: st
   const id = useId();
   return (
     <Stack gap="1rem">
-      <Heading as="h2" fontSize="2rem" id={id}>
+      <Heading as="h2" size={{ base: "3xl", md: "4xl" }} id={id}>
         {props.label}
       </Heading>
       <List.Root

@@ -51,7 +51,12 @@ function VerkInfo({ verk }: Props) {
         >
           <Coverimage gridArea="img" verk={verk} boxShadow="md" />
           <header style={{ gridArea: "title" }}>
-            <VerkTitle verk={verk} headingProps={{ as: "h1", size: "xl" }} fontSize="1.2rem" fontWeight={600} />
+            <VerkTitle
+              verk={verk}
+              headingProps={{ as: "h1", size: { base: "3xl", md: "4xl" } }}
+              fontSize="1.2rem"
+              fontWeight={600}
+            />
           </header>
           <Metadata verk={verk} gridArea="meta" />
           <Text overflowWrap="anywhere" style={{ gridArea: "description" }}>

@@ -11,7 +11,7 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
   return (
     <Style aria-labelledby={headerId}>
       <div>
-        <Heading as="h2" size="lg" id={headerId}>
+        <Heading as="h2" size={{ base: "2xl", md: "3xl" }} id={headerId}>
           Lignende bøker:
         </Heading>
       </div>

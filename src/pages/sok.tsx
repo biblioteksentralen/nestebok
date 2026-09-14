@@ -94,7 +94,7 @@ const TreffListe = (props: { data: WorksResponse }) => (
                   verk={verk}
                   headingProps={{
                     as: "h3",
-                    size: "md",
+                    size: "xl",
                   }}
                 />
               </NextLink>
