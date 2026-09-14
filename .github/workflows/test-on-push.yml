@@ -12,5 +12,5 @@ jobs:
       - uses: biblioteksentralen/github-actions/node-pnpm-setup@v1
         with:
           node-version: 24
-      - run: npm run test-ci
+      - run: pnpm run test-ci
       

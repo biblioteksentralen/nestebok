@@ -31,10 +31,10 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test-ci": "npm run type-check",
+    "test-ci": "pnpm run type-check",
     "type-check": "tsc",
     "lint": "eslint .",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,json,md,mdx,ts,tsx}": "prettier --write",
