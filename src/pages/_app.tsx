@@ -1,12 +1,12 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { BiblioteksentralenProvider } from "@biblioteksentralen/react";
+import { colors, isDevelopment } from "@biblioteksentralen/utils";
+import { Box, defineConfig, Grid } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { PlausibleSetup } from "../components/Plausible";
-import { colors, isDevelopment } from "@biblioteksentralen/utils";
-import { BiblioteksentralenProvider } from "@biblioteksentralen/react";
 
 const LogVercelInfo = () => {
   useEffect(() => {
@@ -19,8 +19,6 @@ const LogVercelInfo = () => {
 
   return null;
 };
-
-import { defineConfig } from "@chakra-ui/react";
 
 // Ved chakra bump v2->v3 endret chakra sine gråfarger seg. Hardkoder de gamle verdiene her så bump av chakra ikke endrer utseendet
 const customTheme = defineConfig({
