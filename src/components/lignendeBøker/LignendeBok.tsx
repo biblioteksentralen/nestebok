@@ -41,7 +41,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
         right={0}
         height="55%"
       />
-      <Grid templateColumns="45% 55%" padding="0 1rem" position="relative" as="li">
+      <Grid templateColumns="45% 55%" padding="0 1rem" position="relative">
         <Coverimage verk={readalike} boxShadow="md" alignSelf="end" />
         <Grid templateRows="45% 55%">
           <Flex padding=".2rem" gap=".2em" flexWrap="wrap" alignContent="flex-end">
