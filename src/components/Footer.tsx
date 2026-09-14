@@ -1,6 +1,5 @@
 import { BiblioteksentralenLogoWithName } from "@biblioteksentralen/icons";
-import { Flex, Link, Stack, Text } from "@biblioteksentralen/react";
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Flex, Link, Stack, Text } from "@chakra-ui/react";
 
 function Footer() {
   return (

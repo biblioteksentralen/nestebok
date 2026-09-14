@@ -1,15 +1,16 @@
-import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/react";
+import { Box, Flex, Grid, LinkBox, LinkOverlay, type LinkBoxProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "../verk/CoverImage";
 import { AuthorsLine } from "../verk/Metadata";
 import { VerkTitle } from "../verk/VerkTitle";
+import { colors } from "@biblioteksentralen/utils";
 
 type Props = {
   readalike: ReadalikesResponse["readalikes"][number];
   verk: WorksResponse["works"][number];
-} & ChakraProps;
+} & LinkBoxProps;
 
 function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
   const viktigsteMatchendeTermer = verk.appealTerms

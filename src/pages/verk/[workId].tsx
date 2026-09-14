@@ -1,4 +1,4 @@
-import { Grid } from "@biblioteksentralen/react";
+import { Grid } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import LignendeBøker from "../../components/lignendeBøker/LignendeBøker";
 import SEO from "../../components/SEO";
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     };
 
   const readalikesResponse = await forrigebokFetcher<ReadalikesResponse>(
-    `/readalikes?workId=${encodeURIComponent(workId)}&limit=9`
+    `/readalikes?workId=${encodeURIComponent(workId)}&limit=9`,
   );
 
   if (!readalikesResponse.work)

@@ -9,8 +9,8 @@ Next.js-frontend for visning av appellfaktor-data fra [forrigebok.no/api](https:
 ## Utvikling
 
 ```
-npm i
-npm run dev
+pnpm i
+pnpm run dev
 ```
 
 ## Prodsette endringer

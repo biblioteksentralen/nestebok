@@ -1,19 +1,18 @@
+import { colors } from "@biblioteksentralen/utils";
 import {
   Box,
   Center,
-  colors,
   Container,
   Flex,
   Link,
   LinkBox,
   LinkOverlay,
   List,
-  ListItem,
   Show,
   Spinner,
   Stack,
   Text,
-} from "@biblioteksentralen/react";
+} from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -90,9 +89,9 @@ const slideDown = keyframes`
 `;
 
 const TreffListe = (props: { data: WorksResponse }) => (
-  <List spacing="1rem">
+  <List.Root gap="1rem">
     {props.data?.works.map((verk, i) => (
-      <ListItem
+      <List.Item
         key={verk.id}
         css={css`
           animation: ${slideDown} 0.15s backwards ${i * 0.1}s;
@@ -107,7 +106,7 @@ const TreffListe = (props: { data: WorksResponse }) => (
           _hover={{ backgroundColor: "gray.700" }}
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
-          <Stack spacing=".25rem" padding="1rem">
+          <Stack columnGap=".25rem" padding="1rem">
             <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
               <VerkTitle
                 verk={verk}
@@ -134,9 +133,9 @@ const TreffListe = (props: { data: WorksResponse }) => (
             </Show>
           </Stack>
         </LinkBox>
-      </ListItem>
+      </List.Item>
     ))}
-  </List>
+  </List.Root>
 );
 
 export default Wrapper;

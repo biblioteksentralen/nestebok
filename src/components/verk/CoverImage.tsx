@@ -1,10 +1,10 @@
 import { BookIcon } from "@biblioteksentralen/icons";
 import { colors, seededRandom } from "@biblioteksentralen/utils";
-import { Box, ChakraProps, Image, Skeleton } from "@chakra-ui/react";
+import { Box, Image, Skeleton, type BoxProps } from "@chakra-ui/react";
 import { css } from "@emotion/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
-interface Props extends ChakraProps {
+interface Props extends BoxProps {
   verk: WorksResponse["works"][number];
 }
 

@@ -1,18 +1,19 @@
-import { BiblioteksentralenProvider, Box, colors, Grid } from "@biblioteksentralen/react";
+import { Box, Grid } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { PlausibleSetup } from "../components/Plausible";
-import { isDevelopment } from "@biblioteksentralen/utils";
+import { colors, isDevelopment } from "@biblioteksentralen/utils";
+import { BiblioteksentralenProvider } from "@biblioteksentralen/react";
 
 const LogVercelInfo = () => {
   useEffect(() => {
     console.info(
       "%c 🌐 Nestebok versjon:",
       "color: blue",
-      process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? (isDevelopment() ? "development" : "unknown")
+      process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? (isDevelopment() ? "development" : "unknown"),
     );
   }, []);
 

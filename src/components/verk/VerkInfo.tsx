@@ -1,4 +1,4 @@
-import { Container, Text, withErrorBoundary } from "@biblioteksentralen/react";
+import { Container, Text } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";
@@ -71,4 +71,4 @@ function VerkInfo({ verk }: Props) {
   );
 }
 
-export default withErrorBoundary(VerkInfo, "VerkInfo");
+export default VerkInfo;

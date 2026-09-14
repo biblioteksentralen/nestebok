@@ -1,4 +1,4 @@
-import { ChakraProps, Flex, FlexProps, Link, Stack } from "@biblioteksentralen/react";
+import { Flex, FlexProps, Link, Stack, type StackProps } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { WorksResponse } from "../../utils/forrigebokApi";
@@ -13,7 +13,7 @@ const LinjeMedDotter = styled(Flex)`
   }
 `;
 
-interface Props extends ChakraProps {
+interface Props extends StackProps {
   verk: WorksResponse["works"][number];
 }
 

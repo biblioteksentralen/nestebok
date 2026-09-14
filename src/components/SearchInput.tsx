@@ -1,13 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  Button,
-  Container,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  usePrevious,
-} from "@biblioteksentralen/react";
+import { Box, BoxProps, Button, Container, InputGroup, InputLeftElement, Stack, usePrevious } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/dist/client/router";
@@ -48,7 +39,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
       e?.preventDefault();
       value && push(`/sok?q=${value}`);
     },
-    [value, push]
+    [value, push],
   );
 
   const prevValue = usePrevious(value);
