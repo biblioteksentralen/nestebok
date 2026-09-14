@@ -1,3 +1,4 @@
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
 import { Container, ContainerProps, Heading, List } from "@chakra-ui/react";
 import { Work } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";
@@ -64,4 +65,4 @@ const Style = (props: ContainerProps) => (
   </Container>
 );
 
-export default LignendeBøker;
+export default withErrorBoundaryBS(LignendeBøker, "LignendeBøker");

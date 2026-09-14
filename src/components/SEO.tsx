@@ -1,3 +1,4 @@
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
 import Head from "next/head";
 import { useEffect } from "react";
 
@@ -43,4 +44,4 @@ function SEO(props: Props) {
   );
 }
 
-export default SEO;
+export default withErrorBoundaryBS(SEO, "SEO");

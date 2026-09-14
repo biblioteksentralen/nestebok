@@ -1,3 +1,4 @@
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
 import { Box, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
@@ -39,4 +40,4 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
   );
 }
 
-export default VerkPreview;
+export default withErrorBoundaryBS(VerkPreview, "BokPreview");

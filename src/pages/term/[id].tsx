@@ -81,6 +81,7 @@ export const View = ({ term, eksempler, factor }: Props) => {
             listStyleType="none"
             gap=".4rem"
             display="flex"
+            flexDirection="row"
             flexWrap="wrap"
             alignItems="flex-start"
             alignContent="flex-end"

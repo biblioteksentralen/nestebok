@@ -1,3 +1,4 @@
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
 import { Container, Grid, Text } from "@chakra-ui/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "./CoverImage";
@@ -69,4 +70,4 @@ function VerkInfo({ verk }: Props) {
   );
 }
 
-export default VerkInfo;
+export default withErrorBoundaryBS(VerkInfo, "VerkInfo");

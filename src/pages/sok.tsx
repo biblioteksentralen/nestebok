@@ -30,7 +30,7 @@ function Wrapper() {
 function Search() {
   const { q } = useRouter().query;
   const query = typeof q === "string" && q.length > 0 ? q : null;
-  const results = useSWR<WorksResponse>(`/works?query=${query}`, forrigebokFetcher);
+  const results = useSWR<WorksResponse>(query ? `/works?query=${encodeURIComponent(query)}` : null, forrigebokFetcher);
 
   if (!query) return null;
 

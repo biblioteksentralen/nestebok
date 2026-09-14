@@ -17,9 +17,7 @@ function Coverimage({ verk, ...chakraProps }: Props) {
   if (!imgUrl) {
     return (
       <Box
-        css={`
-          aspect-ratio: 0.7;
-        `}
+        aspectRatio="0.7"
         borderRadius="lg"
         backgroundColor={randomColor(`${verk.simplifiedPresentationMetadata.title}`)}
         display="flex"
