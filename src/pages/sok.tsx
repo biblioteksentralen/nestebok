@@ -87,7 +87,7 @@ const TreffListe = (props: { data: WorksResponse }) => (
           _hover={{ backgroundColor: "gray.700" }}
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
-          <Stack columnGap=".25rem" padding="1rem">
+          <Stack gap=".25rem" padding="1rem">
             <LinkOverlay asChild>
               <NextLink href={getVerkUrl(verk)}>
                 <VerkTitle
