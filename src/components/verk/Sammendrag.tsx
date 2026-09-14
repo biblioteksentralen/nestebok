@@ -11,6 +11,7 @@ function Sammendrag({ verk, ...chakraProps }: { verk: WorksResponse["works"][num
     <List.Root
       listStyleType="none"
       display="flex"
+      flexDirection="row"
       gap=".5em"
       flexWrap="wrap"
       alignContent="flex-start"
