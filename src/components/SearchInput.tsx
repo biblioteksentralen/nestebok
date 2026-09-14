@@ -6,22 +6,25 @@ import { useMount } from "../utils/useMount";
 
 function SearchInput({ ...chakraProps }: BoxProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState("");
   const { push, query, pathname } = useRouter();
+  const urlQuery = typeof query.q === "string" ? query.q : "";
+  const [value, setValue] = useState(urlQuery);
   const inputId = useId();
 
+  // Oppdaterer søkefeltet når søket i url endres, f.eks. ved tilbake-knappen
+  const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery);
+  if (urlQuery !== prevUrlQuery) {
+    setPrevUrlQuery(urlQuery);
+    setValue(urlQuery);
+  }
+
   useMount(() => {
-    const urlQuery = typeof query.q === "string" ? query.q : undefined;
-    // Prepoulerer søkefelt hvis det ligger et søk i url
-    if (urlQuery && !value) {
-      setValue(urlQuery);
-    }
     // Sett fokus på søkefelt hvis vi er på forsiden
     if (pathname === "/") {
       inputRef.current?.focus();
     }
     // Setter/beholder fokus på søkefelt hvis man nettop har gjort et søk på forsiden
-    if (urlQuery && urlQuery !== value) {
+    if (urlQuery) {
       inputRef.current?.focus();
     }
   });
@@ -34,7 +37,6 @@ function SearchInput({ ...chakraProps }: BoxProps) {
     [value, push],
   );
 
-  const urlQuery = typeof query.q === "string" ? query.q : "";
   useEffect(() => {
     // Søker automatisk etter 1 sekund, men ikke hvis søket allerede ligger i url
     if (!value || value === urlQuery) return;
