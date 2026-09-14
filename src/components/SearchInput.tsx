@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, Container, Icon, Input, InputGroup, Stack, usePrevious } from "@chakra-ui/react";
+import { Box, BoxProps, Button, Container, Icon, Input, InputGroup, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Search } from "react-feather";
@@ -29,18 +29,18 @@ function SearchInput({ ...chakraProps }: BoxProps) {
   const handleSubmit = useCallback(
     (e?: React.FormEvent<HTMLFormElement>) => {
       e?.preventDefault();
-      value && push(`/sok?q=${value}`);
+      value && push(`/sok?q=${encodeURIComponent(value)}`);
     },
     [value, push],
   );
 
-  const prevValue = usePrevious(value);
+  const urlQuery = typeof query.q === "string" ? query.q : "";
   useEffect(() => {
-    if (value === prevValue) return;
-    // Søker automatisk etter 1 sekund
+    // Søker automatisk etter 1 sekund, men ikke hvis søket allerede ligger i url
+    if (!value || value === urlQuery) return;
     const timeout = setTimeout(() => handleSubmit(), 1000);
     return () => clearTimeout(timeout);
-  }, [value, handleSubmit, prevValue]);
+  }, [value, urlQuery, handleSubmit]);
 
   return (
     <Container
