@@ -1,6 +1,5 @@
 import { colors } from "@biblioteksentralen/utils";
 import { Box, Center, Container, Flex, Link, LinkBox, LinkOverlay, List, Spinner, Stack, Text } from "@chakra-ui/react";
-import { css, keyframes } from "@emotion/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -68,21 +67,16 @@ const IngenTreff = (props: { query: string }) => (
   </Stack>
 );
 
-const slideDown = keyframes`
-  from {
-      opacity: 0;
-      transform: translateY(-1rem) scale(0.95);
-  }
-`;
-
 const TreffListe = (props: { data: WorksResponse }) => (
   <List.Root gap="1rem">
     {props.data?.works.map((verk, i) => (
       <List.Item
         key={verk.id}
-        css={css`
-          animation: ${slideDown} 0.15s backwards ${i * 0.1}s;
-        `}
+        animationName="slide-from-top, scale-in, fade-in"
+        animationDuration="0.15s"
+        animationDelay={`${i * 0.1}s`}
+        animationFillMode="backwards"
+        css={{ "--slide-from-top-distance": "1rem" }}
       >
         <LinkBox
           cursor="pointer"
