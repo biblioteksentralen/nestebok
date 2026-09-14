@@ -1,4 +1,5 @@
-import { Container, Heading, List, ListItem, Stack, Text } from "@chakra-ui/react";
+import { colors } from "@biblioteksentralen/utils";
+import { Container, Heading, List, Stack, Text } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import SEO from "../../components/SEO";
 import StarProgressBar from "../../components/StarProgressBar";
@@ -6,7 +7,6 @@ import VerkPreview from "../../components/verk/VerkPreview";
 import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokApi";
 import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { slugifyString } from "../../utils/slugifyString";
-import { colors } from "@biblioteksentralen/utils";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/vocabulary`);

@@ -64,7 +64,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
             <LinkOverlay as={NextLink} href={getVerkUrl(readalike)}>
               <VerkTitle fontSize="xs" headingProps={{ size: "sm" }} verk={readalike} />
             </LinkOverlay>
-            <AuthorsLine noOfLines={1} fontSize="sm" verk={readalike} hideYearPublished />
+            <AuthorsLine lineClamp={1} fontSize="sm" verk={readalike} hideYearPublished />
           </Box>
         </Grid>
       </Grid>

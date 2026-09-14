@@ -1,4 +1,4 @@
-import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@chakra-ui/react";
+import { Container, ContainerProps, Heading, List } from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import { Work } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";
@@ -16,7 +16,7 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
           Lignende bøker:
         </Heading>
       </div>
-      <List
+      <List.Root
         display="grid"
         justifyItems="center"
         gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
@@ -24,17 +24,18 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
         alignItems="end"
       >
         {readalikes.map((readalike, i) => (
-          <Lignendebok
-            key={i}
-            readalike={readalike}
-            verk={work}
-            maxW="20rem"
-            css={css`
-              animation: ${popIn} 0.2s backwards ${i * 0.1 + 0.5}s;
-            `}
-          />
+          <List.Item key={i}>
+            <Lignendebok
+              readalike={readalike}
+              verk={work}
+              maxW="20rem"
+              css={css`
+                animation: ${popIn} 0.2s backwards ${i * 0.1 + 0.5}s;
+              `}
+            />
+          </List.Item>
         ))}
-      </List>
+      </List.Root>
     </Style>
   );
 }
@@ -74,4 +75,4 @@ const Style = (props: ContainerProps) => (
   </Container>
 );
 
-export default withErrorBoundary(LignendeBøker, "LignendeBøker");
+export default LignendeBøker;

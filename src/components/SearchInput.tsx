@@ -1,10 +1,19 @@
-import { Box, BoxProps, Button, Container, InputGroup, InputLeftElement, Stack, usePrevious } from "@chakra-ui/react";
-import { Input } from "@chakra-ui/react";
+import {
+  Box,
+  BoxProps,
+  Button,
+  Container,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Stack,
+  usePrevious,
+} from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/dist/client/router";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
-import { useMount } from "../utils/useMount";
 import { Search } from "react-feather";
+import { useMount } from "../utils/useMount";
 
 const StyledForm = styled.form`
   display: flex;
@@ -62,7 +71,7 @@ function SearchInput({ ...chakraProps }: BoxProps) {
       {...chakraProps}
     >
       <Container maxW="container.md">
-        <Stack spacing=".25rem">
+        <Stack gap=".25rem">
           <Box as="label" htmlFor={inputId} fontWeight="600" fontSize="1.5rem">
             Søk i samlingen
           </Box>
