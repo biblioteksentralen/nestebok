@@ -1,4 +1,5 @@
-import { Box, LinkBox, LinkOverlay, withErrorBoundary } from "@biblioteksentralen/react";
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
+import { Box, LinkBox, LinkOverlay } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
 import { WorksResponse } from "../../utils/forrigebokApi";
@@ -20,7 +21,7 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
       _hover={{ transform: "scale(1.02)", transition: ".2s" }}
     >
       <Coverimage verk={verk} boxShadow="md" />
-      <Box minH="4.3rem" padding=".15rem">
+      <Box minH="6rem" padding=".15rem">
         <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
           <VerkTitle
             verk={verk}
@@ -39,4 +40,4 @@ function VerkPreview({ verk }: { verk: WorksResponse["works"][number] }) {
   );
 }
 
-export default withErrorBoundary(VerkPreview, "BokPreview");
+export default withErrorBoundaryBS(VerkPreview, "BokPreview");

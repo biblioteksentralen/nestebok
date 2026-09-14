@@ -1,15 +1,16 @@
-import { Box, ChakraProps, colors, Flex, Grid, LinkBox, LinkOverlay } from "@biblioteksentralen/react";
+import { Box, Flex, Grid, LinkBox, LinkOverlay, type LinkBoxProps } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { getVerkUrl } from "../../pages/verk/[workId]";
 import { ReadalikesResponse, WorksResponse } from "../../utils/forrigebokApi";
 import Coverimage from "../verk/CoverImage";
 import { AuthorsLine } from "../verk/Metadata";
 import { VerkTitle } from "../verk/VerkTitle";
+import { colors } from "@biblioteksentralen/utils";
 
 type Props = {
   readalike: ReadalikesResponse["readalikes"][number];
   verk: WorksResponse["works"][number];
-} & ChakraProps;
+} & LinkBoxProps;
 
 function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
   const viktigsteMatchendeTermer = verk.appealTerms
@@ -40,7 +41,7 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
         right={0}
         height="55%"
       />
-      <Grid templateColumns="45% 55%" padding="0 1rem" position="relative" as="li">
+      <Grid templateColumns="45% 55%" padding="0 1rem" position="relative">
         <Coverimage verk={readalike} boxShadow="md" alignSelf="end" />
         <Grid templateRows="45% 55%">
           <Flex padding=".2rem" gap=".2em" flexWrap="wrap" alignContent="flex-end">
@@ -61,9 +62,9 @@ function Lignendebok({ readalike, verk, ...chakraProps }: Props) {
           </Flex>
           <Box padding=".5rem">
             <LinkOverlay as={NextLink} href={getVerkUrl(readalike)}>
-              <VerkTitle fontSize="xs" headingProps={{ size: "sm" }} verk={readalike} />
+              <VerkTitle fontSize="xs" headingProps={{ size: "md" }} verk={readalike} />
             </LinkOverlay>
-            <AuthorsLine noOfLines={1} fontSize="sm" verk={readalike} hideYearPublished />
+            <AuthorsLine lineClamp={1} fontSize="sm" verk={readalike} hideYearPublished />
           </Box>
         </Grid>
       </Grid>

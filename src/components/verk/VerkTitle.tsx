@@ -1,29 +1,26 @@
-import { BoxProps, Heading, HeadingProps, Stack, Text } from "@chakra-ui/react";
-import { css } from "@emotion/react";
+import { Heading, HeadingProps, Stack, Text, type StackProps } from "@chakra-ui/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
 type Props = {
   verk: WorksResponse["works"][number];
   hideSubtitle?: boolean;
   headingProps?: HeadingProps;
-} & BoxProps;
+} & StackProps;
 
 export function VerkTitle({ verk, headingProps, hideSubtitle, ...chakraProps }: Props) {
   return (
-    <Stack {...chakraProps} spacing="0">
-      <Heading fontWeight={700} size="md" as="h3" noOfLines={2} {...headingProps}>
+    <Stack {...chakraProps} gap="0">
+      <Heading fontWeight={700} size="xl" as="h3" lineClamp={2} {...headingProps}>
         {verk.simplifiedPresentationMetadata?.title}
       </Heading>
       {!hideSubtitle && verk.simplifiedPresentationMetadata?.subtitle && (
         <Text
-          noOfLines={1}
+          lineClamp={1}
           fontWeight={600}
           fontSize="sm"
-          css={css`
-            &::first-letter {
-              text-transform: capitalize;
-            }
-          `}
+          _firstLetter={{
+            textTransform: "capitalize",
+          }}
         >
           {verk.simplifiedPresentationMetadata?.subtitle}
         </Text>

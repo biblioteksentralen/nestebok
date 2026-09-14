@@ -1,10 +1,9 @@
 import { BookIcon } from "@biblioteksentralen/icons";
 import { colors, seededRandom } from "@biblioteksentralen/utils";
-import { Box, ChakraProps, Image, Skeleton } from "@chakra-ui/react";
-import { css } from "@emotion/react";
+import { Box, Image, type BoxProps } from "@chakra-ui/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
-interface Props extends ChakraProps {
+interface Props extends BoxProps {
   verk: WorksResponse["works"][number];
 }
 
@@ -18,9 +17,7 @@ function Coverimage({ verk, ...chakraProps }: Props) {
   if (!imgUrl) {
     return (
       <Box
-        css={`
-          aspect-ratio: 0.7;
-        `}
+        aspectRatio="0.7"
         borderRadius="lg"
         backgroundColor={randomColor(`${verk.simplifiedPresentationMetadata.title}`)}
         display="flex"
@@ -36,24 +33,7 @@ function Coverimage({ verk, ...chakraProps }: Props) {
     );
   }
 
-  return (
-    <Image
-      fallback={
-        <Skeleton
-          css={css`
-            aspect-ratio: 0.7;
-          `}
-          speed={1.5}
-          borderRadius="lg"
-          {...chakraProps}
-        />
-      }
-      borderRadius="lg"
-      src={imgUrl}
-      alt=""
-      {...chakraProps}
-    />
-  );
+  return <Image borderRadius="lg" src={imgUrl} alt="" {...chakraProps} />;
 }
 
 export default Coverimage;

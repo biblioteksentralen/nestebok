@@ -1,44 +1,30 @@
-import {
-  Box,
-  BoxProps,
-  Button,
-  Container,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-  usePrevious,
-} from "@biblioteksentralen/react";
-import { Input } from "@chakra-ui/react";
-import styled from "@emotion/styled";
-import { useRouter } from "next/dist/client/router";
+import { Box, BoxProps, Button, Container, Icon, Input, InputGroup, Stack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
-import { useMount } from "../utils/useMount";
 import { Search } from "react-feather";
-
-const StyledForm = styled.form`
-  display: flex;
-  flex: 1;
-  align-items: flex-end;
-`;
+import { useMount } from "../utils/useMount";
 
 function SearchInput({ ...chakraProps }: BoxProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState("");
   const { push, query, pathname } = useRouter();
+  const urlQuery = typeof query.q === "string" ? query.q : "";
+  const [value, setValue] = useState(urlQuery);
   const inputId = useId();
 
+  // Oppdaterer søkefeltet når søket i url endres, f.eks. ved tilbake-knappen
+  const [prevUrlQuery, setPrevUrlQuery] = useState(urlQuery);
+  if (urlQuery !== prevUrlQuery) {
+    setPrevUrlQuery(urlQuery);
+    setValue(urlQuery);
+  }
+
   useMount(() => {
-    const urlQuery = typeof query.q === "string" ? query.q : undefined;
-    // Prepoulerer søkefelt hvis det ligger et søk i url
-    if (urlQuery && !value) {
-      setValue(urlQuery);
-    }
     // Sett fokus på søkefelt hvis vi er på forsiden
     if (pathname === "/") {
       inputRef.current?.focus();
     }
     // Setter/beholder fokus på søkefelt hvis man nettop har gjort et søk på forsiden
-    if (urlQuery && urlQuery !== value) {
+    if (urlQuery) {
       inputRef.current?.focus();
     }
   });
@@ -46,18 +32,17 @@ function SearchInput({ ...chakraProps }: BoxProps) {
   const handleSubmit = useCallback(
     (e?: React.FormEvent<HTMLFormElement>) => {
       e?.preventDefault();
-      value && push(`/sok?q=${value}`);
+      value && push(`/sok?q=${encodeURIComponent(value)}`);
     },
-    [value, push]
+    [value, push],
   );
 
-  const prevValue = usePrevious(value);
   useEffect(() => {
-    if (value === prevValue) return;
-    // Søker automatisk etter 1 sekund
+    // Søker automatisk etter 1 sekund, men ikke hvis søket allerede ligger i url
+    if (!value || value === urlQuery) return;
     const timeout = setTimeout(() => handleSubmit(), 1000);
     return () => clearTimeout(timeout);
-  }, [value, handleSubmit, prevValue]);
+  }, [value, urlQuery, handleSubmit]);
 
   return (
     <Container
@@ -71,46 +56,54 @@ function SearchInput({ ...chakraProps }: BoxProps) {
       {...chakraProps}
     >
       <Container maxW="container.md">
-        <Stack spacing=".25rem">
-          <Box as="label" htmlFor={inputId} fontWeight="600" fontSize="1.5rem">
-            Søk i samlingen
+        <Stack gap=".25rem">
+          <Box asChild fontWeight="600" fontSize="1.5rem">
+            <label htmlFor={inputId}>Søk i samlingen</label>
           </Box>
-          <StyledForm role="search" onSubmit={handleSubmit}>
-            <InputGroup>
-              <InputLeftElement pointerEvents="none" color="whiteAlpha.500" aria-hidden>
-                <Search size="1em" />
-              </InputLeftElement>
-              <Input
-                id={inputId}
-                type="search"
-                placeholder="Søk etter et verk.."
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                ref={inputRef}
-                backgroundColor="whiteAlpha.200"
-                color="whiteAlpha.900"
-                borderRightRadius={0}
-                _hover={{
-                  backgroundColor: "whiteAlpha.300",
-                }}
-                _focusVisible={{
-                  outline: "outline",
-                  boxShadow: "var(--chakra-shadows-outline)",
-                  backgroundColor: "whiteAlpha.300",
-                }}
-                minW={{ base: "14rem", sm: "17rem" }}
-              />
-            </InputGroup>
-            <Button
-              type="submit"
-              variant="solid"
-              backgroundColor={"whiteAlpha.300"}
-              borderLeftRadius={0}
-              _hover={{ backgroundColor: "whiteAlpha.400" }}
-            >
-              Søk
-            </Button>
-          </StyledForm>
+          <Box asChild role="search" display="flex" flex="1" alignItems="flex-end">
+            <form onSubmit={handleSubmit}>
+              <InputGroup
+                startElement={
+                  <Icon asChild pointerEvents="none" color="whiteAlpha.500" aria-hidden>
+                    <Search size="1.2em" />
+                  </Icon>
+                }
+              >
+                <Input
+                  id={inputId}
+                  type="search"
+                  placeholder="Søk etter et verk.."
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  ref={inputRef}
+                  backgroundColor="whiteAlpha.200"
+                  color="whiteAlpha.900"
+                  _placeholder={{
+                    color: "whiteAlpha.500",
+                  }}
+                  borderRightRadius={0}
+                  _hover={{
+                    backgroundColor: "whiteAlpha.300",
+                  }}
+                  _focusVisible={{
+                    outline: "outline",
+                    boxShadow: "var(--chakra-shadows-outline)",
+                    backgroundColor: "whiteAlpha.300",
+                  }}
+                  minW={{ base: "14rem", sm: "17rem" }}
+                />
+              </InputGroup>
+              <Button
+                type="submit"
+                variant="solid"
+                backgroundColor={"whiteAlpha.300"}
+                borderLeftRadius={0}
+                _hover={{ backgroundColor: "whiteAlpha.400" }}
+              >
+                Søk
+              </Button>
+            </form>
+          </Box>
         </Stack>
       </Container>
     </Container>

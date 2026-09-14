@@ -1,19 +1,23 @@
-import { ChakraProps, Flex, FlexProps, Link, Stack } from "@biblioteksentralen/react";
-import styled from "@emotion/styled";
+import { Flex, FlexProps, Link, Stack, type StackProps } from "@chakra-ui/react";
 import { useState } from "react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
-const LinjeMedDotter = styled(Flex)`
-  flex-wrap: wrap;
-  line-height: 1.3;
-  > *:not(:last-child):after {
-    display: inline-block;
-    content: "•";
-    padding: 0 0.5em;
-  }
-`;
+const LinjeMedDotter = (props: FlexProps) => (
+  <Flex
+    flexWrap="wrap"
+    lineHeight="1.3"
+    css={{
+      "& > *:not(:last-child)::after": {
+        display: "inline-block",
+        content: '"•"',
+        padding: "0 0.5em",
+      },
+    }}
+    {...props}
+  />
+);
 
-interface Props extends ChakraProps {
+interface Props extends StackProps {
   verk: WorksResponse["works"][number];
 }
 

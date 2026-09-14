@@ -28,6 +28,7 @@ bower_components
 
 # next
 .next
+next-env.d.ts
 
 # node-waf configuration
 .lock-wscript

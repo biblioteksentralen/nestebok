@@ -5,35 +5,36 @@
   "version": "1.0.0",
   "author": "Biblioteksentralen",
   "dependencies": {
-    "@biblioteksentralen/icons": "^2.0.1",
-    "@biblioteksentralen/react": "^2.0.0",
+    "@biblioteksentralen/icons": "^2.1.1",
+    "@biblioteksentralen/react": "^4.0.0",
     "@biblioteksentralen/utils": "^2.0.0",
-    "next": "^13.4.2",
-    "react": "^18.2.0",
+    "@chakra-ui/react": "^3.37.0",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-feather": "^2.0.10",
-    "react-dom": "^18.2.0",
-    "swr": "^2.1.5"
+    "swr": "^2.5.1"
   },
   "devDependencies": {
-    "@types/node": "^20.1.3",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
-    "eslint": "^8.40.0",
-    "eslint-config-next": "^13.4.2",
-    "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "prettier": "^2.8.8",
-    "typescript": "^5.0.4"
+    "@types/node": "^24",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test-ci": "npm run type-check",
+    "test-ci": "pnpm run type-check",
     "type-check": "tsc",
-    "lint": "next lint",
-    "prepare": "husky install"
+    "lint": "eslint .",
+    "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,jsx,json,md,mdx,ts,tsx}": "prettier --write",
@@ -41,5 +42,9 @@
   },
   "prettier": {
     "printWidth": 120
-  }
+  },
+  "engines": {
+    "node": "24.x"
+  },
+  "packageManager": "pnpm@10.4.1"
 }

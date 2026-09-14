@@ -1,4 +1,5 @@
-import { colors, Container, Heading, List, ListItem, Stack, Text } from "@biblioteksentralen/react";
+import { colors } from "@biblioteksentralen/utils";
+import { Container, Heading, List, Stack, Text } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import SEO from "../../components/SEO";
 import StarProgressBar from "../../components/StarProgressBar";
@@ -36,7 +37,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 
   const vocabularyPromise = forrigebokFetcher<VocabularyResponse>(`/vocabulary`);
   const readalikesPromise = forrigebokFetcher<ReadalikesResponse>(
-    `/readalikes?terms=${encodeURIComponent(id)}&limit=10`
+    `/readalikes?terms=${encodeURIComponent(id)}&limit=10`,
   );
 
   const [vocabularyResponse, readalikesResponse] = await Promise.all([vocabularyPromise, readalikesPromise]);
@@ -76,9 +77,17 @@ export const View = ({ term, eksempler, factor }: Props) => {
           <span>{term.name}</span>
         </Heading>
         {term.synonyms && (
-          <List gap=".4rem" display="flex" flexWrap="wrap" alignItems="flex-start" alignContent="flex-end">
+          <List.Root
+            listStyleType="none"
+            gap=".4rem"
+            display="flex"
+            flexDirection="row"
+            flexWrap="wrap"
+            alignItems="flex-start"
+            alignContent="flex-end"
+          >
             {term.synonyms.map((synonym) => (
-              <ListItem
+              <List.Item
                 fontSize="sm"
                 key={synonym}
                 padding=".1em .5em"
@@ -87,16 +96,17 @@ export const View = ({ term, eksempler, factor }: Props) => {
                 borderRadius="md"
               >
                 {synonym}
-              </ListItem>
+              </List.Item>
             ))}
-          </List>
+          </List.Root>
         )}
       </Stack>
       <Text fontWeight={600}>{factor?.name}</Text>
       <Text marginTop="2rem" maxW="20em">
         {term.definition}
       </Text>
-      <List
+      <List.Root
+        listStyleType="none"
         marginTop="4rem"
         display="grid"
         alignItems="end"
@@ -104,11 +114,11 @@ export const View = ({ term, eksempler, factor }: Props) => {
         gridTemplateColumns="repeat(auto-fill, minmax(8rem,1fr))"
       >
         {eksempler.readalikes.map((verk) => (
-          <ListItem key={verk.id}>
+          <List.Item key={verk.id}>
             <VerkPreview verk={verk} />
-          </ListItem>
+          </List.Item>
         ))}
-      </List>
+      </List.Root>
     </Container>
   );
 };

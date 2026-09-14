@@ -1,6 +1,6 @@
-import { withErrorBoundary } from "@biblioteksentralen/react";
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 interface Props {
   title?: string;
@@ -44,4 +44,4 @@ function SEO(props: Props) {
   );
 }
 
-export default withErrorBoundary(SEO, "SEO");
+export default withErrorBoundaryBS(SEO, "SEO");

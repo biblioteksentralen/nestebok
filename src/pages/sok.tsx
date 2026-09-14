@@ -1,20 +1,5 @@
-import {
-  Box,
-  Center,
-  colors,
-  Container,
-  Flex,
-  Link,
-  LinkBox,
-  LinkOverlay,
-  List,
-  ListItem,
-  Show,
-  Spinner,
-  Stack,
-  Text,
-} from "@biblioteksentralen/react";
-import { css, keyframes } from "@emotion/react";
+import { colors } from "@biblioteksentralen/utils";
+import { Box, Center, Container, Flex, Link, LinkBox, LinkOverlay, List, Spinner, Stack, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
@@ -45,7 +30,7 @@ function Wrapper() {
 function Search() {
   const { q } = useRouter().query;
   const query = typeof q === "string" && q.length > 0 ? q : null;
-  const results = useSWR<WorksResponse>(`/works?query=${query}`, forrigebokFetcher);
+  const results = useSWR<WorksResponse>(query ? `/works?query=${encodeURIComponent(query)}` : null, forrigebokFetcher);
 
   if (!query) return null;
 
@@ -82,21 +67,16 @@ const IngenTreff = (props: { query: string }) => (
   </Stack>
 );
 
-const slideDown = keyframes`
-  from {
-      opacity: 0;
-      transform: translateY(-1rem) scale(0.95);
-  }
-`;
-
 const TreffListe = (props: { data: WorksResponse }) => (
-  <List spacing="1rem">
+  <List.Root gap="1rem" listStyleType="none">
     {props.data?.works.map((verk, i) => (
-      <ListItem
+      <List.Item
         key={verk.id}
-        css={css`
-          animation: ${slideDown} 0.15s backwards ${i * 0.1}s;
-        `}
+        animationName="slide-from-top, scale-in, fade-in"
+        animationDuration="0.15s"
+        animationDelay={`${i * 0.1}s`}
+        animationFillMode="backwards"
+        css={{ "--slide-from-top-distance": "1rem" }}
       >
         <LinkBox
           cursor="pointer"
@@ -107,36 +87,39 @@ const TreffListe = (props: { data: WorksResponse }) => (
           _hover={{ backgroundColor: "gray.700" }}
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
-          <Stack spacing=".25rem" padding="1rem">
-            <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
-              <VerkTitle
-                verk={verk}
-                headingProps={{
-                  as: "h3",
-                  size: "md",
-                }}
-              />
+          <Stack gap=".25rem" padding="1rem">
+            <LinkOverlay asChild>
+              <NextLink href={getVerkUrl(verk)}>
+                <VerkTitle
+                  verk={verk}
+                  headingProps={{
+                    as: "h3",
+                    size: "xl",
+                  }}
+                />
+              </NextLink>
             </LinkOverlay>
             <Metadata verk={verk} />
-            <Show above="md">
-              <Flex flexGrow={1} gap=".5rem" alignItems="flex-end" fontSize="sm" fontWeight="600" flexWrap="wrap">
-                {verk.appealTerms.slice(0, 3).map((term) => (
-                  <Box
-                    backgroundColor={colors.neptune[600]}
-                    padding=".25rem .5rem"
-                    borderRadius="md"
-                    key={term.term.id}
-                  >
-                    {term.term.label}
-                  </Box>
-                ))}
-              </Flex>
-            </Show>
+            <Flex
+              hideBelow="md"
+              flexGrow={1}
+              gap=".5rem"
+              alignItems="flex-end"
+              fontSize="sm"
+              fontWeight="600"
+              flexWrap="wrap"
+            >
+              {verk.appealTerms.slice(0, 3).map((term) => (
+                <Box backgroundColor={colors.neptune[600]} padding=".25rem .5rem" borderRadius="md" key={term.term.id}>
+                  {term.term.label}
+                </Box>
+              ))}
+            </Flex>
           </Stack>
         </LinkBox>
-      </ListItem>
+      </List.Item>
     ))}
-  </List>
+  </List.Root>
 );
 
 export default Wrapper;

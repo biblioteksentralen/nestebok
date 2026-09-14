@@ -1,5 +1,5 @@
-import { Container, ContainerProps, Heading, List, withErrorBoundary } from "@biblioteksentralen/react";
-import { css, keyframes } from "@emotion/react";
+import { withErrorBoundaryBS } from "@biblioteksentralen/react";
+import { Container, ContainerProps, Heading, List } from "@chakra-ui/react";
 import { Work } from "../../utils/forrigebokApi";
 import Lignendebok from "./LignendeBok";
 import { useId } from "react";
@@ -12,11 +12,12 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
   return (
     <Style aria-labelledby={headerId}>
       <div>
-        <Heading as="h2" size="lg" id={headerId}>
+        <Heading as="h2" size={{ base: "2xl", md: "3xl" }} id={headerId}>
           Lignende bøker:
         </Heading>
       </div>
-      <List
+      <List.Root
+        listStyleType="none"
         display="grid"
         justifyItems="center"
         gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))"
@@ -24,39 +25,29 @@ function LignendeBøker(props: { readalikes: Work[]; work: Work }) {
         alignItems="end"
       >
         {readalikes.map((readalike, i) => (
-          <Lignendebok
-            key={i}
-            readalike={readalike}
-            verk={work}
-            maxW="20rem"
-            css={css`
-              animation: ${popIn} 0.2s backwards ${i * 0.1 + 0.5}s;
-            `}
-          />
+          <List.Item key={i}>
+            <Lignendebok
+              readalike={readalike}
+              verk={work}
+              maxW="20rem"
+              animationName="slide-from-left, scale-in, fade-in"
+              animationDuration="0.2s"
+              animationDelay={`${i * 0.1 + 0.5}s`}
+              animationFillMode="backwards"
+            />
+          </List.Item>
         ))}
-      </List>
+      </List.Root>
     </Style>
   );
 }
 
-const popIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-.5rem) scale(0.7);
-  }
-`;
-
-const slideDown = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-2rem) scale(0.9);
-  }
-`;
-
 const Style = (props: ContainerProps) => (
   <Container
     color="gray.900"
-    animation={`${slideDown} 1s`}
+    animationName="slide-from-top, scale-in, fade-in"
+    animationDuration="1s"
+    css={{ "--slide-from-top-distance": "2rem" }}
     maxW="5xl"
     backgroundColor="gray.100"
     borderRadius={{ lg: "xl" }}
@@ -74,4 +65,4 @@ const Style = (props: ContainerProps) => (
   </Container>
 );
 
-export default withErrorBoundary(LignendeBøker, "LignendeBøker");
+export default withErrorBoundaryBS(LignendeBøker, "LignendeBøker");
