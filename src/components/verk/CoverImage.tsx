@@ -1,7 +1,6 @@
 import { BookIcon } from "@biblioteksentralen/icons";
 import { colors, seededRandom } from "@biblioteksentralen/utils";
-import { Box, Image, Skeleton, type BoxProps } from "@chakra-ui/react";
-import { css } from "@emotion/react";
+import { Box, Image, type BoxProps } from "@chakra-ui/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
 interface Props extends BoxProps {
@@ -36,24 +35,7 @@ function Coverimage({ verk, ...chakraProps }: Props) {
     );
   }
 
-  return (
-    <Image
-      fallback={
-        <Skeleton
-          css={css`
-            aspect-ratio: 0.7;
-          `}
-          speed={1.5}
-          borderRadius="lg"
-          {...chakraProps}
-        />
-      }
-      borderRadius="lg"
-      src={imgUrl}
-      alt=""
-      {...chakraProps}
-    />
-  );
+  return <Image borderRadius="lg" src={imgUrl} alt="" {...chakraProps} />;
 }
 
 export default Coverimage;

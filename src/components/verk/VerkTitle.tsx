@@ -1,5 +1,4 @@
 import { Heading, HeadingProps, Stack, Text, type StackProps } from "@chakra-ui/react";
-import { css } from "@emotion/react";
 import { WorksResponse } from "../../utils/forrigebokApi";
 
 type Props = {
@@ -19,11 +18,9 @@ export function VerkTitle({ verk, headingProps, hideSubtitle, ...chakraProps }: 
           lineClamp={1}
           fontWeight={600}
           fontSize="sm"
-          css={css`
-            &::first-letter {
-              text-transform: capitalize;
-            }
-          `}
+          _firstLetter={{
+            textTransform: "capitalize",
+          }}
         >
           {verk.simplifiedPresentationMetadata?.subtitle}
         </Text>

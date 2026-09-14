@@ -21,8 +21,7 @@ const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
   return (
     <List.Item>
       <Box
-        as={NextLink}
-        href={getTermUrl({ name: props.term.label, id: props.term.id })}
+        asChild
         display="flex"
         gap=".25em"
         width="max-content"
@@ -31,11 +30,12 @@ const Term = (props: WorksResponse["works"][number]["appealTerms"][number]) => {
         backgroundColor={fremtredende ? colors.neptune[700] : colors.neptune[500]}
         padding=".2em .75em"
         fontWeight={600}
-        key={props.term?.id}
         _hover={{ opacity: 0.9 }}
       >
-        <StarProgressBar progress={fremtredende ? 1 : 0.5} />
-        <span>{props.term.label}</span>
+        <NextLink href={getTermUrl({ name: props.term.label, id: props.term.id })}>
+          <StarProgressBar progress={fremtredende ? 1 : 0.5} />
+          <span>{props.term.label}</span>
+        </NextLink>
       </Box>
     </List.Item>
   );

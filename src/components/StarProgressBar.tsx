@@ -1,5 +1,4 @@
 import * as React from "react";
-import styled from "@emotion/styled";
 
 interface Props extends React.SVGProps<SVGSVGElement> {
   /**
@@ -7,10 +6,6 @@ interface Props extends React.SVGProps<SVGSVGElement> {
    */
   progress: number;
 }
-
-const Rect = styled.rect`
-  transition: x 1s;
-`;
 
 function StarProgressBar(props: Props) {
   const maskId = React.useId();
@@ -23,7 +18,7 @@ function StarProgressBar(props: Props) {
           fill="white"
         />
       </mask>
-      <Rect mask={`url(#${maskId})`} width="11" height="14" fill="currentColor" x={props.progress * 11 - 9.5} />
+      <rect mask={`url(#${maskId})`} width="11" height="14" fill="currentColor" x={props.progress * 11 - 9.5} />
       <path
         fillRule="evenodd"
         clipRule="evenodd"

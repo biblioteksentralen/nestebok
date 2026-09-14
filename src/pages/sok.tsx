@@ -1,18 +1,5 @@
 import { colors } from "@biblioteksentralen/utils";
-import {
-  Box,
-  Center,
-  Container,
-  Flex,
-  Link,
-  LinkBox,
-  LinkOverlay,
-  List,
-  Show,
-  Spinner,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Container, Flex, Link, LinkBox, LinkOverlay, List, Spinner, Stack, Text } from "@chakra-ui/react";
 import { css, keyframes } from "@emotion/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -107,30 +94,33 @@ const TreffListe = (props: { data: WorksResponse }) => (
         >
           <Coverimage borderRightRadius="none" width="7rem" verk={verk} boxShadow="md" />
           <Stack columnGap=".25rem" padding="1rem">
-            <LinkOverlay as={NextLink} href={getVerkUrl(verk)}>
-              <VerkTitle
-                verk={verk}
-                headingProps={{
-                  as: "h3",
-                  size: "md",
-                }}
-              />
+            <LinkOverlay asChild>
+              <NextLink href={getVerkUrl(verk)}>
+                <VerkTitle
+                  verk={verk}
+                  headingProps={{
+                    as: "h3",
+                    size: "md",
+                  }}
+                />
+              </NextLink>
             </LinkOverlay>
             <Metadata verk={verk} />
-            <Show above="md">
-              <Flex flexGrow={1} gap=".5rem" alignItems="flex-end" fontSize="sm" fontWeight="600" flexWrap="wrap">
-                {verk.appealTerms.slice(0, 3).map((term) => (
-                  <Box
-                    backgroundColor={colors.neptune[600]}
-                    padding=".25rem .5rem"
-                    borderRadius="md"
-                    key={term.term.id}
-                  >
-                    {term.term.label}
-                  </Box>
-                ))}
-              </Flex>
-            </Show>
+            <Flex
+              hideBelow="md"
+              flexGrow={1}
+              gap=".5rem"
+              alignItems="flex-end"
+              fontSize="sm"
+              fontWeight="600"
+              flexWrap="wrap"
+            >
+              {verk.appealTerms.slice(0, 3).map((term) => (
+                <Box backgroundColor={colors.neptune[600]} padding=".25rem .5rem" borderRadius="md" key={term.term.id}>
+                  {term.term.label}
+                </Box>
+              ))}
+            </Flex>
           </Stack>
         </LinkBox>
       </List.Item>
