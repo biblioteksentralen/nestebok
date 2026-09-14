@@ -8,14 +8,12 @@ import { ReadalikesResponse, VocabularyResponse } from "../../utils/forrigebokAp
 import { forrigebokFetcher } from "../../utils/forrigebokFetcher";
 import { slugifyString } from "../../utils/slugifyString";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const vocabulary = await forrigebokFetcher<VocabularyResponse>(`/vocabulary`);
-
-  return {
-    paths: vocabulary.terms.map((term) => ({ params: { id: term.id } })),
-    fallback: "blocking",
-  };
-};
+// Prerendrer ingen termer ved build. Hver term har to API-kall, og å bygge alle samtidig overbelaster forrigebok-API-et.
+// Sidene genereres i stedet ved første besøk og caches (fallback: "blocking" + revalidate).
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: "blocking",
+});
 
 type Props = {
   term: VocabularyResponse["terms"][number];
